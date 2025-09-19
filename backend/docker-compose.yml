@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: yescoin-postgres
+    environment:
+      POSTGRES_USER: yescoin_user
+      POSTGRES_PASSWORD: yescoin_password
+      POSTGRES_DB: yescoin_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-postgres.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - yescoin-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U yescoin_user -d yescoin_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis (Optional - for caching and rate limiting)
+  redis:
+    image: redis:7-alpine
+    container_name: yescoin-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - yescoin-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # YesCoin Backend API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yescoin-api
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://yescoin_user:yescoin_password@postgres:5432/yescoin_db?schema=public
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - yescoin-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Development Database (for testing)
+  postgres-test:
+    image: postgres:15-alpine
+    container_name: yescoin-postgres-test
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: yescoin_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    networks:
+      - yescoin-network
+    profiles:
+      - test
+
+volumes:
+  postgres_data:
+    driver: local
+  postgres_test_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  yescoin-network:
+    driver: bridge

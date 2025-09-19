@@ -1,0 +1,358 @@
+/* 像素艺术全局样式 */
+
+/* 基础像素化渲染 */
+.pixel-render {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* 像素化文本 */
+.pixel-text {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 基础按钮样式 */
+.pixel-button {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  font-weight: bold;
+  border: 2px solid #4A423B;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+}
+
+.pixel-button:hover {
+  transform: scale(1.05);
+  box-shadow: 6px 6px 0 0 rgba(74,66,59,1);
+  transform-origin: center;
+}
+
+.pixel-button:active {
+  transform: scale(0.95);
+  box-shadow: 2px 2px 0 0 rgba(74,66,59,0.8);
+}
+
+/* 主要按钮样式 */
+.pixel-button-primary {
+  background-color: #FFD700;
+  color: #4A423B;
+  border: 2px solid #4A423B;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  font-weight: bold;
+  image-rendering: pixelated;
+}
+
+.pixel-button-primary:hover {
+  background-color: #FFC107;
+  transform: scale(1.05);
+  box-shadow: 6px 6px 0 0 rgba(74,66,59,1);
+}
+
+/* 次要按钮样式 */
+.pixel-button-secondary {
+  background-color: #F28C28;
+  color: white;
+  border: 2px solid #4A423B;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  font-weight: bold;
+  image-rendering: pixelated;
+}
+
+.pixel-button-secondary:hover {
+  filter: brightness(0.9);
+  transform: scale(1.05);
+  box-shadow: 6px 6px 0 0 rgba(74,66,59,1);
+}
+
+/* 像素卡片样式 */
+.pixel-card {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  transition: all 0.2s ease-out;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><rect width="1" height="1" fill="%234A423B" opacity="0.03"/></svg>');
+}
+
+.pixel-card:hover {
+  transform: scale(1.02);
+  box-shadow: 6px 6px 0 0 rgba(74,66,59,0.9);
+  transform-origin: center;
+}
+
+/* 导航链接像素化下划线 */
+.pixel-nav-link {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.pixel-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #FFD700 0%, #FFD700 25%, 
+    transparent 25%, transparent 50%,
+    #FFD700 50%, #FFD700 75%,
+    transparent 75%, transparent 100%
+  );
+  background-size: 8px 3px;
+  transition: width 0.3s ease-out;
+}
+
+.pixel-nav-link:hover::after {
+  width: 100%;
+}
+
+/* 进度条像素化样式 */
+.pixel-progress {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  position: relative;
+  overflow: hidden;
+  height: 24px;
+}
+
+.pixel-progress-fill {
+  background-color: #FF0077;
+  height: 100%;
+  transition: all 0.5s ease-out;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255,255,255,0.2) 2px,
+    rgba(255,255,255,0.2) 4px
+  );
+}
+
+/* 数字计数器动画 */
+.pixel-counter {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: '"Press Start 2P"', 'ZCOOL KuaiLe', monospace;
+  display: inline-block;
+  transition: transform 0.3s ease-out;
+}
+
+.pixel-counter.updating {
+  animation: counterUp 0.3s ease-out;
+}
+
+/* FAQ手风琴动画 */
+.pixel-accordion {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  transition: all 0.2s ease-out;
+  overflow: hidden;
+}
+
+.pixel-accordion-header {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  border: 2px solid #4A423B;
+  padding: 8px 16px;
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  background-color: #F8F2ED;
+  color: #4A423B;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.pixel-accordion-content {
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  max-height: 0;
+}
+
+.pixel-accordion-content.open {
+  max-height: 500px;
+  padding: 16px;
+  padding-top: 0;
+}
+
+/* 模态框像素化 */
+.pixel-modal {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  transition: all 0.2s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(74, 66, 59, 0.8);
+  backdrop-filter: blur(2px);
+}
+
+.pixel-modal-content {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  transition: all 0.2s ease-out;
+  max-width: 28rem;
+  width: 100%;
+  animation: modalIn 0.3s ease-out;
+}
+
+/* 通知样式 */
+.pixel-notification {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+  box-shadow: 4px 4px 0 0 rgba(74,66,59,0.8);
+  transition: all 0.2s ease-out;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  padding: 16px;
+  max-width: 24rem;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.pixel-notification.success {
+  border-color: #16a34a;
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+.pixel-notification.error {
+  border-color: #dc2626;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.pixel-notification.warning {
+  border-color: #ca8a04;
+  background-color: rgba(245, 158, 11, 0.1);
+}
+
+/* 像素化输入框 */
+.pixel-input {
+  @apply pixel-render pixel-text;
+  @apply bg-card border-2 border-brown;
+  @apply px-4 py-2 font-pixel;
+  @apply focus:outline-none focus:border-gold focus:shadow-pixel;
+  @apply transition-all duration-200;
+}
+
+/* 像素化选择框 */
+.pixel-select {
+  @apply pixel-input;
+  @apply appearance-none;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><polygon points="0,0 12,0 6,8" fill="%234A423B"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px 8px;
+}
+
+/* 响应式像素化 */
+@media (max-width: 640px) {
+  .pixel-button {
+    @apply text-sm px-3 py-2;
+  }
+  
+  .pixel-card {
+    @apply p-3;
+  }
+  
+  .pixel-progress {
+    height: 20px;
+  }
+}
+
+/* 禁用状态 */
+.pixel-disabled {
+  @apply opacity-50 cursor-not-allowed;
+  @apply pointer-events-none;
+}
+
+/* 加载状态 */
+.pixel-loading {
+  @apply animate-pixel-glow;
+}
+
+/* 像素化分隔线 */
+.pixel-divider {
+  @apply border-brown;
+  border-style: dashed;
+  border-width: 2px 0 0 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #4A423B 0px,
+    #4A423B 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  height: 2px;
+  border: none;
+}

@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model - stores wallet addresses and user info
+model User {
+  id          String   @id @default(cuid())
+  address     String   @unique // Wallet address as unique identifier
+  nonce       String?  // For wallet signature verification
+  hasClaimed  Boolean  @default(false) // Whether user has claimed airdrop
+  referrerId  String?  // ID of the user who referred this user
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  referrer        User?             @relation("UserReferrals", fields: [referrerId], references: [id])
+  referrals       User[]            @relation("UserReferrals")
+  taskCompletions TaskCompletion[]
+  referralRewards ReferralReward[]
+  claimHistory    ClaimHistory[]
+
+  @@map("users")
+}
+
+// Task model - defines available airdrop tasks
+model Task {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g., "follow_twitter", "join_telegram"
+  title       String   // Display title
+  description String   // Task description
+  points      Int      @default(0) // Points awarded for completion
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  completions TaskCompletion[]
+
+  @@map("tasks")
+}
+
+// TaskCompletion model - tracks which tasks users have completed
+model TaskCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  taskId      String
+  completedAt DateTime @default(now())
+  verified    Boolean  @default(false) // Whether completion is verified
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskId]) // Prevent duplicate completions
+  @@map("task_completions")
+}
+
+// ReferralReward model - tracks rewards for referrers
+model ReferralReward {
+  id          String      @id @default(cuid())
+  referrerId  String      // User who made the referral
+  refereeId   String      // User who was referred
+  rewardType  String      // Type of reward (BNB or YES tokens)
+  amount      String      // Amount in wei/smallest unit
+  status      String      @default("PENDING")
+  txHash      String?     // Transaction hash when reward is paid
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  referrer User @relation(fields: [referrerId], references: [id], onDelete: Cascade)
+
+  @@map("referral_rewards")
+}
+
+// ClaimHistory model - tracks airdrop claims
+model ClaimHistory {
+  id        String      @id @default(cuid())
+  userId    String
+  amount    String      // Amount claimed in wei
+  txHash    String?     // Transaction hash
+  status    String      @default("PENDING")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("claim_history")
+}
+
+// Note: SQLite doesn't support enums, using strings instead
+// RewardType: "BNB" | "YES_TOKEN"
+// RewardStatus: "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED"
+// ClaimStatus: "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED"

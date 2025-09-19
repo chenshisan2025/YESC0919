@@ -1,0 +1,58 @@
+/* 导入像素艺术样式 */
+@import './styles/pixel-art.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pixel-border: 2px;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+* {
+  image-rendering: pixelated;
+}
+
+.pixel-border {
+  border: var(--pixel-border) solid #4A423B;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.btn-ghost {
+  font-family: 'Silkscreen', 'ZCOOL KuaiLe', sans-serif;
+  color: #4A423B;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  text-decoration: underline;
+}
+
+.card {
+  background-color: rgba(239, 232, 225, 0.9);
+  border-radius: 0;
+}
+
+.nav-link {
+  color: #4A423B;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  background-color: #EFE8E1;
+  border: 2px solid #4A423B;
+}
