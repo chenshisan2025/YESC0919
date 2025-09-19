@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, TrendingUp, Users, Coins, BarChart3, DollarSign, Copy, CheckCircle, Globe, Shield, Zap, Target } from 'lucide-react'
-import { useWeb3 } from '../contexts/Web3Context'
+import { useWallet } from '../contexts/WalletContext'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const TokenInfo = () => {
-  const { isConnected, provider } = useWeb3()
+  const { isConnected } = useWallet()
   const [tokenStats, setTokenStats] = useState({
     totalSupply: '1,000,000,000,000,000', // 1000万亿
     circulatingSupply: '500,000,000,000,000', // 500万亿

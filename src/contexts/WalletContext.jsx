@@ -32,11 +32,15 @@ export function WalletProvider({ children }) {
 
   // 监听钱包连接状态变化
   useEffect(() => {
+    console.log('钱包状态变化:', { isConnected, address, isAuthenticated, isAuthenticating })
+    
     if (isConnected && address && !isAuthenticated && !isAuthenticating) {
       // 钱包连接后自动尝试登录
+      console.log('钱包已连接，开始自动登录')
       handleLogin()
     } else if (!isConnected && isAuthenticated) {
       // 钱包断开后登出
+      console.log('钱包已断开，执行登出')
       authService.logout()
     }
   }, [isConnected, address, isAuthenticated, isAuthenticating])
@@ -44,26 +48,33 @@ export function WalletProvider({ children }) {
   // 连接钱包
   const connect = async () => {
     try {
+      console.log('开始连接钱包...')
       setAuthError(null)
       await open()
+      console.log('钱包连接成功')
     } catch (error) {
       console.error('连接钱包失败:', error)
-      setAuthError('连接钱包失败')
+      setAuthError(`连接钱包失败: ${error.message || '未知错误'}`)
     }
   }
 
   // 用户登录
   const handleLogin = async () => {
-    if (!address || isAuthenticating) return
+    if (!address || isAuthenticating) {
+      console.log('登录条件不满足:', { address, isAuthenticating })
+      return
+    }
     
+    console.log('开始用户登录...', address)
     setIsAuthenticating(true)
     setAuthError(null)
     
     try {
       await authService.loginWithWallet(address)
+      console.log('用户登录成功')
     } catch (error) {
       console.error('登录失败:', error)
-      setAuthError(error.message)
+      setAuthError(`登录失败: ${error.message || '服务器错误'}`)
     } finally {
       setIsAuthenticating(false)
     }
@@ -85,10 +96,13 @@ export function WalletProvider({ children }) {
     // 钱包状态
     account: formatAddress(address),
     address,
+    formattedAddress: formatAddress(address),
     isConnected,
     isConnecting,
     connect,
+    connectWallet: connect, // 添加别名以兼容现有代码
     disconnect: handleDisconnect,
+    error: authError,
     
     // 用户认证状态
     user,

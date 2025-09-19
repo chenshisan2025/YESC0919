@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
-import { useWeb3 } from '../contexts/Web3Context'
+import { useWallet } from '../contexts/WalletContext'
 import logo from '../assets/logo.svg'
 import twitter from '../assets/twitter.svg'
 import telegram from '../assets/telegram.svg'
@@ -19,13 +19,12 @@ function Header() {
   const { 
     isConnected, 
     address, 
-    formattedAddress, 
-    connectMetaMask, 
-    connectWalletConnect, 
+    account, 
+    connect, 
     disconnect, 
     isConnecting,
-    error 
-  } = useWeb3()
+    authError 
+  } = useWallet()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [lang, setLang] = useState('中文')
 
@@ -41,7 +40,7 @@ function Header() {
     return isConnected ? (
       <div className="flex items-center gap-2">
         <div className="pixel-card bg-gold text-brown px-4 py-2 font-pixel text-sm">
-          {formattedAddress}
+          {account}
         </div>
         <button 
           onClick={disconnect}
@@ -51,7 +50,7 @@ function Header() {
         </button>
       </div>
     ) : (
-      <button className="pixel-button-primary" onClick={connectMetaMask}>
+      <button className="pixel-button-primary" onClick={connect}>
         连接钱包
       </button>
     )
@@ -116,12 +115,12 @@ function WalletMobile() {
   const { 
     isConnected, 
     address, 
-    formattedAddress, 
-    connectMetaMask, 
+    account, 
+    connect, 
     disconnect, 
     isConnecting,
-    error 
-  } = useWeb3()
+    authError 
+  } = useWallet()
   
   if (isConnecting) {
     return (
@@ -134,7 +133,7 @@ function WalletMobile() {
   return isConnected ? (
     <div className="flex flex-col gap-2 w-full">
       <div className="pixel-card bg-gold text-brown px-4 py-2 font-pixel text-sm text-center">
-        {formattedAddress}
+        {account}
       </div>
       <button 
         onClick={disconnect}
@@ -142,14 +141,14 @@ function WalletMobile() {
       >
         断开连接
       </button>
-      {error && (
+      {authError && (
         <div className="pixel-card bg-red-100 border border-red-400 text-red-700 px-3 py-2 text-sm">
-          {error}
+          {authError}
         </div>
       )}
     </div>
   ) : (
-    <button className="pixel-button-primary w-full" onClick={connectMetaMask}>
+    <button className="pixel-button-primary w-full" onClick={connect}>
       连接钱包
     </button>
   )

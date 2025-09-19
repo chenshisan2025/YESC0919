@@ -5,13 +5,14 @@ import TokenInfo from './pages/TokenInfo'
 import NFT from './pages/NFT'
 import Airdrop from './pages/Airdrop'
 import FAQ from './pages/FAQ'
+import WalletTest from './pages/WalletTest'
 import { Web3Provider as Web3ModalProvider } from './components/Web3Provider'
-import { Web3Provider } from './contexts/Web3Context'
+import { WalletProvider } from './contexts/WalletContext'
 
 function App() {
   return (
     <Web3ModalProvider>
-      <Web3Provider>
+      <WalletProvider>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -19,9 +20,10 @@ function App() {
             <Route path="/nft" element={<NFT />} />
             <Route path="/airdrop" element={<Airdrop />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/wallet-test" element={<WalletTest />} />
           </Routes>
         </Layout>
-      </Web3Provider>
+      </WalletProvider>
     </Web3ModalProvider>
   )
 }

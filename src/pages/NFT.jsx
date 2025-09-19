@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useWeb3 } from '../contexts/Web3Context'
+import { useWallet } from '../contexts/WalletContext'
 import { toast } from 'sonner'
 
 const NFT = () => {
-  const { isConnected, address, provider, connectMetaMask } = useWeb3()
+  const { isConnected, address, connect: connectWallet } = useWallet()
   const [totalMinted, setTotalMinted] = useState(0)
   const [isMinting, setIsMinting] = useState(false)
   const [inviteLink, setInviteLink] = useState('')
@@ -15,7 +15,6 @@ const NFT = () => {
 
   // 获取合约实例
   const getContract = () => {
-    if (!provider) return null
     // 这里应该返回实际的合约实例
     return null
   }
@@ -48,7 +47,7 @@ const NFT = () => {
   // 处理铸造
   const handleMint = async () => {
     if (!isConnected) {
-      await connectMetaMask()
+      await connectWallet()
       return
     }
 
@@ -83,7 +82,7 @@ const NFT = () => {
 
   useEffect(() => {
     loadContractData()
-  }, [provider])
+  }, [isConnected])
 
   useEffect(() => {
     generateInviteLink()

@@ -1,34 +1,26 @@
-import { useWeb3 } from '../contexts/Web3Context'
+import { useWallet } from '../contexts/WalletContext'
 
 const WalletMobile = () => {
   const { 
     isConnected, 
     address, 
     formattedAddress, 
-    connectMetaMask, 
-    connectWalletConnect, 
+    connect, 
     disconnect, 
     isConnecting,
     error 
-  } = useWeb3()
+  } = useWallet()
 
   return (
     <div className="p-4">
       {!isConnected ? (
         <div className="space-y-2">
           <button 
-            onClick={connectMetaMask}
+            onClick={connect}
             disabled={isConnecting}
             className="w-full bg-yellow-400 hover:bg-yellow-500 disabled:bg-yellow-300 text-black px-4 py-2 rounded-lg font-press text-sm transition-colors border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
           >
-            {isConnecting ? '连接中...' : 'MetaMask'}
-          </button>
-          <button 
-            onClick={connectWalletConnect}
-            disabled={isConnecting}
-            className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white px-4 py-2 rounded-lg font-press text-sm transition-colors border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
-          >
-            {isConnecting ? '连接中...' : 'WalletConnect'}
+            {isConnecting ? '连接中...' : '连接钱包'}
           </button>
         </div>
       ) : (

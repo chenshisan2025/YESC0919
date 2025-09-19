@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useWeb3 } from '../contexts/Web3Context';
+import { useWallet } from '../contexts/WalletContext';
 import { toast } from 'sonner';
 import { Copy, ExternalLink, CheckCircle, Clock, Users, Gift, Twitter, MessageCircle } from 'lucide-react';
 
 const Airdrop = () => {
-  const { isConnected, address, connectWallet } = useWeb3();
+  const { isConnected, address, connectWallet, error: walletError, isConnecting } = useWallet();
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -272,6 +272,7 @@ const Airdrop = () => {
   // 获取领取按钮文本
   const getClaimButtonText = () => {
     if (claiming) return '领取中...';
+    if (isConnecting) return '连接中...';
     if (!isConnected) return '连接钱包';
     if (!canClaimAirdrop()) return '完成所有任务';
     return '领取 10,000,000 YES';
@@ -281,6 +282,14 @@ const Airdrop = () => {
   useEffect(() => {
     setAirdropEligible(canClaimAirdrop());
   }, [tasks]);
+
+  // 监听钱包错误
+  useEffect(() => {
+    if (walletError) {
+      console.error('钱包错误:', walletError)
+      toast.error(`钱包错误: ${walletError}`)
+    }
+  }, [walletError])
 
   // 格式化数字
   const formatNumber = (num) => {
@@ -318,18 +327,28 @@ const Airdrop = () => {
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">开始您的空投之旅</h2>
             <p className="text-gray-600 mb-6">连接钱包并完成认证，即可开始任务并领取空投奖励</p>
             <button 
-              onClick={connectWallet}
-              disabled={loading}
+              onClick={async () => {
+                try {
+                  console.log('开始连接钱包...')
+                  await connectWallet()
+                  console.log('钱包连接成功')
+                  toast.success('钱包连接成功！')
+                } catch (error) {
+                  console.error('连接钱包失败:', error)
+                  toast.error(`连接钱包失败: ${error.message || '请重试'}`)
+                }
+              }}
+              disabled={loading || isConnecting}
               className="px-8 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg font-semibold transition-colors flex items-center justify-center mx-auto"
             >
-              {loading ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  连接中...
-                </>
-              ) : (
-                '连接钱包'
-              )}
+              {loading || isConnecting ? (
+                 <>
+                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                   连接中...
+                 </>
+               ) : (
+                 '连接钱包'
+               )}
             </button>
           </div>
         ) : (
@@ -468,13 +487,27 @@ const Airdrop = () => {
                   </div>
                   
                   <motion.button
-                    onClick={!isConnected ? connectWallet : handleClaimAirdrop}
-                    disabled={claiming || (isConnected && !canClaimAirdrop())}
+                    onClick={async () => {
+                      if (!isConnected) {
+                        try {
+                          console.log('领取按钮：开始连接钱包...')
+                          await connectWallet()
+                          console.log('领取按钮：钱包连接成功')
+                          toast.success('钱包连接成功！')
+                        } catch (error) {
+                          console.error('领取按钮：连接钱包失败:', error)
+                          toast.error(`连接钱包失败: ${error.message || '请重试'}`)
+                        }
+                      } else {
+                        handleClaimAirdrop()
+                      }
+                    }}
+                    disabled={claiming || isConnecting || (isConnected && !canClaimAirdrop())}
                     className="w-full pixel-button-primary py-3 text-sm flex items-center justify-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {claiming && <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-brown" />}
+                    {(claiming || isConnecting) && <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-brown" />}
                     {getClaimButtonText()}
                   </motion.button>
                   
