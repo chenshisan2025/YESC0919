@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider } from 'wagmi'
 import { config, projectId } from '../config/wagmi'
 import { ReactNode, Component, ErrorInfo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 // 创建查询客户端，添加错误处理
 const queryClient = new QueryClient({
@@ -19,7 +20,31 @@ const queryClient = new QueryClient({
   },
 })
 
-// 错误边界组件
+// Web3 错误边界内容组件
+const Web3ErrorBoundaryContent = ({ error }: { error?: Error }) => {
+  const { t } = useTranslation()
+  
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center p-8">
+        <h2 className="text-2xl font-bold text-red-600 mb-4">
+          {t('common.web3ConnectionError')}
+        </h2>
+        <p className="text-gray-600 mb-6">
+          {t('common.walletConnectionProblem')}
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
+        >
+          {t('common.refreshPage')}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// Web3 错误边界组件
 class Web3ErrorBoundary extends Component<
   { children: ReactNode },
   { hasError: boolean; error?: Error }
@@ -34,29 +59,12 @@ class Web3ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Web3 Provider Error:', error, errorInfo)
+    console.error('Web3 Error:', error, errorInfo)
   }
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
-            <h2 className="text-lg font-semibold text-red-800 mb-2">
-              Web3连接错误
-            </h2>
-            <p className="text-red-600 mb-4">
-              钱包连接出现问题，请刷新页面重试
-            </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-            >
-              刷新页面
-            </button>
-          </div>
-        </div>
-      )
+      return <Web3ErrorBoundaryContent error={this.state.error} />
     }
 
     return this.props.children

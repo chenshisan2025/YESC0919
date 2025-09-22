@@ -2,6 +2,7 @@
 import { authAPI, tokenStorage } from '../utils/api'
 import { signMessage } from '@wagmi/core'
 import { config } from '../config/wagmi'
+import i18n from '../i18n'
 
 // 认证状态管理
 class AuthService {
@@ -28,26 +29,26 @@ class AuthService {
   // 钱包签名登录流程
   async loginWithWallet(walletAddress) {
     try {
-      console.log('开始钱包登录流程...', walletAddress)
+      console.log(i18n.t('common.startWalletLogin'), walletAddress)
       
       // 1. 获取nonce
       const { nonce } = await authAPI.getNonce(walletAddress)
-      console.log('获取到nonce:', nonce)
+      console.log(i18n.t('common.gotNonce'), nonce)
       
       // 2. 构造签名消息
-      const message = `欢迎来到YesCoin！\n\n请签名以验证您的钱包地址。\n\n随机数: ${nonce}\n地址: ${walletAddress}`
+      const message = i18n.t('common.welcomeMessage', { nonce, address: walletAddress })
       
       // 3. 请求用户签名
-      console.log('请求用户签名...')
+      console.log(i18n.t('common.requestUserSign'))
       const signature = await signMessage(config, {
         message,
         account: walletAddress
       })
-      console.log('签名成功:', signature)
+      console.log(i18n.t('common.signSuccess'), signature)
       
       // 4. 发送登录请求
       const response = await authAPI.login(walletAddress, signature, nonce)
-      console.log('登录响应:', response)
+      console.log(i18n.t('common.loginResponse'), response)
       
       // 5. 存储token和用户信息
       if (response.token) {
@@ -56,22 +57,22 @@ class AuthService {
         this.isAuthenticated = true
         this.notifyListeners()
         
-        console.log('登录成功:', response.user)
+        console.log(i18n.t('common.loginSuccess'), response.user)
         return { success: true, user: response.user }
       } else {
-        throw new Error('登录响应中缺少token')
+        throw new Error(i18n.t('common.missingToken'))
       }
       
     } catch (error) {
-      console.error('钱包登录失败:', error)
+      console.error(i18n.t('common.walletLoginFailed'), error)
       
       // 处理用户拒绝签名
       if (error.message.includes('User rejected') || error.message.includes('用户拒绝')) {
-        throw new Error('用户取消了签名，登录已取消')
+        throw new Error(i18n.t('common.userCancelledSign'))
       }
       
       // 处理其他错误
-      throw new Error(error.message || '登录失败，请重试')
+      throw new Error(error.message || i18n.t('common.loginFailedRetry'))
     }
   }
 
@@ -89,7 +90,7 @@ class AuthService {
       this.notifyListeners()
       return true
     } catch (error) {
-      console.log('Token已过期或无效')
+      console.log(i18n.t('common.tokenExpired'))
       this.logout()
       return false
     }
@@ -101,13 +102,13 @@ class AuthService {
     this.user = null
     this.isAuthenticated = false
     this.notifyListeners()
-    console.log('用户已登出')
+    console.log(i18n.t('common.userLoggedOut'))
   }
 
   // 获取用户信息
   async getUserProfile() {
     if (!this.isAuthenticated) {
-      throw new Error('用户未登录')
+      throw new Error(i18n.t('common.userNotLoggedIn'))
     }
     
     try {
@@ -116,7 +117,7 @@ class AuthService {
       this.notifyListeners()
       return user
     } catch (error) {
-      console.error('获取用户信息失败:', error)
+      console.error(i18n.t('common.getUserInfoFailed'), error)
       throw error
     }
   }
@@ -124,13 +125,13 @@ class AuthService {
   // 获取用户统计
   async getUserStats() {
     if (!this.isAuthenticated) {
-      throw new Error('用户未登录')
+      throw new Error(i18n.t('common.userNotLoggedIn'))
     }
     
     try {
       return await authAPI.getStats()
     } catch (error) {
-      console.error('获取用户统计失败:', error)
+      console.error(i18n.t('common.getUserStatsFailed'), error)
       throw error
     }
   }
@@ -143,7 +144,7 @@ class AuthService {
     if (referralAddress) {
       // 存储推荐人地址到localStorage
       localStorage.setItem('referral_address', referralAddress)
-      console.log('检测到推荐链接:', referralAddress)
+      console.log(i18n.t('common.detectedReferral'), referralAddress)
       
       // 清理URL参数
       const newUrl = window.location.pathname

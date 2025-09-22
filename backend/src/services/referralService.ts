@@ -366,64 +366,12 @@ export class ReferralService {
     }
   }
 
-  // Claim BNB reward (process payout)
+  // Claim BNB reward (DISABLED - BNB rewards removed)
   async claimBnbReward(rewardId: string): Promise<ServiceResponse<string>> {
-    try {
-      const reward = await prisma.referralReward.findUnique({
-        where: { id: rewardId },
-        include: {
-          referrer: true
-        }
-      });
-
-      if (!reward) {
-        return {
-          success: false,
-          error: 'Reward not found'
-        };
-      }
-
-      if (reward.bnbAmount <= 0) {
-        return {
-          success: false,
-          error: 'No BNB reward to claim'
-        };
-      }
-
-      // Process BNB payout through blockchain service
-      const payoutResult = await blockchainService.sendBnbReward(
-        reward.referrer.walletAddress,
-        reward.bnbAmount
-      );
-
-      if (!payoutResult.success) {
-        return {
-          success: false,
-          error: payoutResult.error || 'Failed to process BNB payout'
-        };
-      }
-
-      // Update reward record with transaction hash
-      await prisma.referralReward.update({
-        where: { id: rewardId },
-        data: {
-          bnbClaimed: true,
-          bnbClaimedAt: new Date(),
-          bnbTxHash: payoutResult.data
-        }
-      });
-
-      return {
-        success: true,
-        data: payoutResult.data // transaction hash
-      };
-    } catch (error) {
-      console.error('Claim BNB reward error:', error);
-      return {
-        success: false,
-        error: 'Failed to claim BNB reward'
-      };
-    }
+    return {
+      success: false,
+      error: 'BNB rewards are no longer available. Only YES token rewards are supported.'
+    };
   }
 
   // Get pending rewards for a user

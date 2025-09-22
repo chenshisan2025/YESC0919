@@ -73,23 +73,7 @@ export class RewardService {
           }
         });
 
-        // 2. Create BNB reward (0.005 BNB)
-        const bnbReward = await tx.reward.create({
-          data: {
-            userId: referrer.id,
-            type: 'REFERRAL_BNB',
-            amount: '0.005',
-            currency: 'BNB',
-            status: 'PENDING',
-            metadata: {
-              referredUserId: user.id,
-              referredUserAddress: userAddress,
-              nftTokenId,
-              transactionHash,
-              rewardType: 'NFT_MINT_REFERRAL'
-            }
-          }
-        });
+        // BNB reward removed - only YES token rewards now
 
         // 3. Create tracking record
         await tx.reward.create({
@@ -103,12 +87,12 @@ export class RewardService {
               nftTokenId,
               transactionHash,
               referrerAddress: user.referrer,
-              rewardsCreated: [tokenReward.id, bnbReward.id]
+              rewardsCreated: [tokenReward.id]
             }
           }
         });
 
-        return { tokenReward, bnbReward };
+        return { tokenReward };
       });
 
       // Try to automatically distribute YES tokens
@@ -124,7 +108,6 @@ export class RewardService {
         message: 'NFT mint rewards processed successfully',
         data: {
           tokenRewardId: rewards.tokenReward.id,
-          bnbRewardId: rewards.bnbReward.id,
           referrerAddress: referrer.address
         }
       };

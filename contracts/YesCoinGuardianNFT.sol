@@ -15,7 +15,7 @@ contract YesCoinGuardianNFT is ERC721, ERC721Enumerable, Ownable, ReentrancyGuar
     // Constants
     uint256 public constant MAX_SUPPLY = 10000;
     uint256 public constant MINT_PRICE = 0.01 ether; // 0.01 BNB mint fee
-    uint256 public constant REFERRAL_REWARD_BNB = 0.005 ether; // 0.005 BNB referral reward
+    // BNB referral rewards have been removed
     uint256 public constant REFERRAL_REWARD_YES = 1000000 * 10**18; // 1,000,000 YES tokens
     
     // State variables
@@ -25,13 +25,13 @@ contract YesCoinGuardianNFT is ERC721, ERC721Enumerable, Ownable, ReentrancyGuar
     // Referral system
     mapping(address => address) public referrers; // minter => referrer
     mapping(address => uint256) public referralCounts; // referrer => count of successful referrals
-    mapping(address => uint256) public pendingBNBRewards; // referrer => pending BNB rewards
+    // BNB rewards mapping removed
     mapping(address => uint256) public pendingYESRewards; // referrer => pending YES token rewards
     
     // Events
     event NFTMinted(address indexed minter, uint256 indexed tokenId, address indexed referrer);
-    event ReferralReward(address indexed referrer, address indexed minter, uint256 bnbReward, uint256 yesReward);
-    event RewardsClaimed(address indexed referrer, uint256 bnbAmount, uint256 yesAmount);
+    event ReferralReward(address indexed referrer, address indexed minter, uint256 yesReward);
+    event RewardsClaimed(address indexed referrer, uint256 yesAmount);
     event BaseURIUpdated(string newBaseURI);
     
     constructor(
@@ -62,11 +62,10 @@ contract YesCoinGuardianNFT is ERC721, ERC721Enumerable, Ownable, ReentrancyGuar
             referrers[msg.sender] = referrer;
             referralCounts[referrer]++;
             
-            // Add rewards to pending balances
-            pendingBNBRewards[referrer] += REFERRAL_REWARD_BNB;
+            // Add YES token rewards to pending balances (BNB rewards removed)
             pendingYESRewards[referrer] += REFERRAL_REWARD_YES;
             
-            emit ReferralReward(referrer, msg.sender, REFERRAL_REWARD_BNB, REFERRAL_REWARD_YES);
+            emit ReferralReward(referrer, msg.sender, REFERRAL_REWARD_YES);
         }
         
         emit NFTMinted(msg.sender, tokenId, referrer);
@@ -78,18 +77,9 @@ contract YesCoinGuardianNFT is ERC721, ERC721Enumerable, Ownable, ReentrancyGuar
     }
     
     /**
-     * @dev Claim pending BNB rewards (YES tokens handled separately)
+     * @dev BNB rewards have been removed from the system
+     * YES token rewards are handled separately through backend services
      */
-    function claimBNBRewards() external nonReentrant {
-        uint256 bnbReward = pendingBNBRewards[msg.sender];
-        require(bnbReward > 0, "No BNB rewards to claim");
-        require(address(this).balance >= bnbReward, "Insufficient contract balance");
-        
-        pendingBNBRewards[msg.sender] = 0;
-        payable(msg.sender).transfer(bnbReward);
-        
-        emit RewardsClaimed(msg.sender, bnbReward, 0);
-    }
     
     /**
      * @dev Get mint progress information
@@ -109,19 +99,16 @@ contract YesCoinGuardianNFT is ERC721, ERC721Enumerable, Ownable, ReentrancyGuar
      * @param user Address to query
      * @return referrer The referrer address
      * @return referralCount Number of successful referrals made by this address
-     * @return pendingBNB Pending BNB rewards
      * @return pendingYES Pending YES token rewards
      */
     function getReferralInfo(address user) external view returns (
         address referrer,
         uint256 referralCount,
-        uint256 pendingBNB,
         uint256 pendingYES
     ) {
         return (
             referrers[user],
             referralCounts[user],
-            pendingBNBRewards[user],
             pendingYESRewards[user]
         );
     }

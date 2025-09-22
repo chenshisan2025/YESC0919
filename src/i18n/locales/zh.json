@@ -1,0 +1,541 @@
+{
+  "nav": {
+    "home": "首页",
+    "tokenInfo": "代币信息",
+    "nft": "NFT",
+    "airdrop": "空投",
+    "faq": "FAQ",
+    "buyYes": "购买 YES",
+    "gettingTasks": "获取任务列表...",
+    "getTasksSuccess": "任务列表获取成功",
+    "getTasksFailed": "获取任务列表失败",
+    "completingTask": "完成任务",
+    "taskCompleteSuccess": "任务完成成功",
+    "taskCompleteFailed": "完成任务失败",
+    "backendSubmitFailed": "后端任务完成提交失败",
+    "startWalletLogin": "开始钱包登录流程...",
+    "gotNonce": "获取到nonce:",
+    "requestUserSign": "请求用户签名...",
+    "signSuccess": "签名成功:",
+    "loginResponse": "登录响应:",
+    "loginSuccess": "登录成功:",
+    "missingToken": "登录响应中缺少token",
+    "walletLoginFailed": "钱包登录失败:",
+    "userCancelledSign": "用户取消了签名，登录已取消",
+    "loginFailedRetry": "登录失败，请重试",
+    "tokenExpired": "Token已过期或无效",
+    "userLoggedOut": "用户已登出",
+    "userNotLoggedIn": "用户未登录",
+    "getUserInfoFailed": "获取用户信息失败:",
+    "getUserStatsFailed": "获取用户统计失败:",
+    "detectedReferral": "检测到推荐链接:",
+    "welcomeMessage": "欢迎来到YesCoin！\n\n请签名以验证您的钱包地址。\n\n随机数: {nonce}\n地址: {address}",
+    "checkingEligibility": "检查空投资格...",
+    "eligibilityResult": "空投资格检查结果:",
+    "checkEligibilityFailed": "检查空投资格失败:",
+    "basicConditionsMet": "满足基本条件",
+    "connectWallet": "连接钱包",
+    "completeBasicTasks": "完成基础任务",
+    "startClaimAirdrop": "开始领取空投...",
+    "alreadyClaimed": "您已经领取过空投，每个地址只能领取一次",
+    "notEligibleToClaim": "不符合领取条件",
+    "airdropClaimSuccess": "空投领取成功:",
+    "airdropClaimFailed": "空投领取失败:",
+    "getClaimHistory": "获取领取历史...",
+    "claimHistorySuccess": "领取历史获取成功:",
+    "getClaimHistoryFailed": "获取领取历史失败:",
+    "getAirdropStats": "获取空投统计...",
+    "airdropStatsSuccess": "空投统计获取成功:",
+    "getAirdropStatsFailed": "获取空投统计失败:",
+    "simulateAirdropClaim": "模拟空投领取...",
+    "checkingStatus": "检查资格中...",
+    "alreadyClaimedStatus": "已领取",
+    "notEligibleStatus": "不符合条件",
+    "cannotClaimNow": "暂不可领取",
+    "canClaim": "可以领取",
+    "getReferralInfo": "获取推荐信息...",
+    "referralInfoSuccess": "推荐信息获取成功:",
+    "getReferralInfoFailed": "获取推荐信息失败:",
+    "getReferralRewards": "获取推荐奖励列表...",
+    "referralRewardsSuccess": "推荐奖励列表获取成功:",
+    "getReferralRewardsFailed": "获取推荐奖励列表失败:",
+    "cannotGenerateReferralLink": "无法生成推荐链接：用户地址为空",
+    "generateReferralLink": "生成推荐链接:",
+    "cannotGenerateLink": "无法生成推荐链接",
+    "referralLinkCopied": "推荐链接已复制到剪贴板",
+    "copyReferralLinkFailed": "复制推荐链接失败:",
+    "referralLinkCopiedFallback": "推荐链接已复制到剪贴板（降级方案）",
+    "fallbackCopyFailed": "降级复制方案也失败:",
+    "copyFailedManual": "复制失败，请手动复制链接",
+    "detectedValidReferral": "检测到有效推荐链接:",
+    "pendingStatus": "待发放",
+    "completedStatus": "已发放",
+    "failedStatus": "发放失败",
+    "unknownStatus": "未知状态",
+    "joinTelegramGroup": "加入官方 Telegram 群组",
+    "joinTelegramDesc": "加入YesCoin官方Telegram群组获取最新消息",
+    "followTwitter": "关注 Twitter 并转发置顶推文",
+    "followTwitterDesc": "关注@yescoin_official并转发置顶推文",
+    "socialShare": "在社交平台发布 #YesCoin 话题",
+    "socialShareDesc": "在任意社交平台发布包含#YesCoin话题的内容",
+    "connectWalletTask": "连接 BEP20 钱包地址",
+    "connectWalletTaskDesc": "连接您的BEP20兼容钱包以接收代币",
+    "connectWallet": "连接钱包",
+    "connecting": "连接中...",
+    "disconnect": "断开",
+    "language": "中文"
+  },
+  "home": {
+    "title": "YesCoin Web3 宇宙",
+    "subtitle": "拥抱下一个百万倍迷因传奇！",
+    "description": "100% 公平发射 · 社区驱动 · 像素复古风 Meme 币",
+    "joinButton": "立即加入 YES 革命！",
+    "hero": {
+      "title": "YesCoin Web3 宇宙",
+      "subtitle": "拥抱下一个百万倍迷因传奇！",
+      "tagline": "100% 公平发射 · 社区驱动 · 像素复古风 Meme 币",
+      "description": "YesCoin 是一个诞生于 BSC 链的全新 Meme 宇宙。在这里，没有预售、没有团队特权，每一枚代币都公平发放给社区！YesCoin 旨在用幽默和创造力将加密爱好者聚集在一起。拿起你的 YesCoin，一起对平庸说\"不\"，对未来大声说\"YES\"！",
+      "cta": "立即加入 YES 革命！"
+    },
+    "stats": {
+      "holders": "持币地址数",
+      "marketCap": "当前市值",
+      "totalSupply": "总供应量",
+      "burned": "已销毁",
+      "nftMinted": "NFT已铸造",
+      "airdropParticipants": "空投参与者"
+    },
+    "features": {
+      "title": "为什么选择 YesCoin?",
+      "fairLaunch": {
+        "title": "公平发射",
+        "desc": "100%社区驱动，无预挖，无团队预留，真正的去中心化代币"
+      },
+      "pureMeme": {
+        "title": "纯粹MEME",
+        "desc": "专注于社区文化建设，让每个持有者都成为YesCoin的传播者"
+      },
+      "pixelStyle": {
+        "title": "像素风格",
+        "desc": "独特的像素艺术设计，致敬经典游戏文化"
+      },
+      "communityDriven": {
+        "title": "社区驱动",
+        "desc": "完全由社区治理，每个持有者都有发言权"
+      },
+      "defi": {
+        "title": "DeFi生态",
+        "description": "完整的DeFi生态系统，包括质押、流动性挖矿、NFT等功能"
+      }
+    },
+    "roadmap": {
+      "title": "路线图 · 星际探索",
+      "currentStage": "当前阶段",
+      "q4_2025": "NFT系列发布，社区建设启动",
+      "q1_2026": "DeFi功能上线，质押挖矿开启",
+      "q2_2026": "链游开发，元宇宙集成",
+      "h2_2026": "跨链扩展，生态完善",
+      "q1": {
+        "title": "2024 Q1",
+        "items": [
+          "代币发行与社区建设",
+          "去中心化交易所上线",
+          "社区治理启动"
+        ]
+      },
+      "q2": {
+        "title": "2024 Q2",
+        "items": [
+          "NFT市场开发",
+          "质押挖矿功能",
+          "合作伙伴拓展"
+        ]
+      },
+      "q3": {
+        "title": "2024 Q3",
+        "items": [
+          "跨链桥接功能",
+          "移动端应用",
+          "生态系统扩展"
+        ]
+      },
+      "q4": {
+        "title": "2024 Q4",
+        "items": [
+          "元宇宙集成",
+          "全球市场推广",
+          "生态完善"
+        ]
+      }
+    },
+    "team": {
+      "title": "核心团队 · 传奇战士",
+      "don": {
+        "name": "Don",
+        "role": "项目创始人"
+      },
+      "knight": {
+        "name": "Knight",
+        "role": "技术总监"
+      },
+      "guard": {
+        "name": "Guard",
+        "role": "安全专家"
+      },
+      "horn": {
+        "name": "Horn",
+        "role": "社区经理"
+      },
+      "founder": {
+        "name": "创始人",
+        "role": "区块链技术专家"
+      },
+      "cto": {
+        "name": "技术总监",
+        "role": "全栈开发工程师"
+      },
+      "cmo": {
+        "name": "市场总监",
+        "role": "数字营销专家"
+      }
+    },
+    "community": {
+      "title": "加入我们的社区",
+      "description": "YesCoin不仅仅是一个代币，更是一个充满活力的社区。我们相信去中心化的力量，相信社区的智慧。每一个YesCoin持有者都是我们生态系统的重要组成部分。",
+      "joinTelegram": "加入 Telegram",
+      "followTwitter": "关注 Twitter"
+    },
+    "cta": {
+      "title": "准备好了吗？",
+      "description": "加入 YesCoin 宇宙，开启你的 Web3 冒险之旅！",
+      "button": "立即铸造 NFT"
+    }
+  },
+  "airdrop": {
+    "title": "🪙 YesCoin 空投",
+    "subtitle": "完成任务，领取 10,000,000 枚 YES 代币",
+    "welcomeBack": "欢迎回来，{{address}}",
+    "startJourney": {
+      "title": "开始您的空投之旅",
+      "description": "连接钱包并完成认证，即可开始任务并领取空投奖励"
+    },
+    "tasks": {
+      "title": "📋 完成任务",
+      "completed": "已完成: {{completed}} / {{total}}",
+      "reward": "奖励",
+      "noTasks": "暂无可用任务",
+      "status": {
+        "completed": "已完成",
+        "verifying": "验证中..."
+      },
+      "buttons": {
+        "goComplete": "去完成",
+        "verify": "验证"
+      },
+      "twitter": {
+        "title": "关注 YesCoin Twitter",
+        "description": "关注我们的官方 Twitter 账号，获取最新动态"
+      },
+      "telegram": {
+        "title": "加入 Telegram 群组",
+        "description": "加入我们的 Telegram 社区，与其他用户交流"
+      },
+      "discord": {
+        "title": "加入 Discord 服务器",
+        "description": "加入我们的 Discord 社区，参与讨论"
+      },
+      "website": {
+        "title": "访问官方网站",
+        "description": "浏览我们的官方网站，了解更多信息"
+      }
+    },
+    "claim": {
+      "title": "🎁 空投领取",
+      "claimableAmount": "可领取金额",
+      "taskProgress": "任务进度",
+      "history": {
+        "title": "📜 领取历史",
+        "noRecords": "暂无领取记录",
+        "received": "已到账"
+      }
+    },
+    "referral": {
+      "title": "👥 推荐系统",
+      "referredUsers": "推荐人数",
+      "totalRewards": "奖励总额",
+      "copyLink": "复制推荐链接"
+    },
+    "stats": {
+      "title": "空投统计",
+      "totalParticipants": "总参与人数",
+      "totalClaimed": "已领取人数",
+      "totalDistributed": "发放总量",
+      "claimRate": "领取率"
+    },
+    "buttons": {
+      "claiming": "领取中...",
+      "completeAllTasks": "完成所有任务",
+      "claimTokens": "领取 10,000,000 YES"
+    },
+    "errors": {
+      "connectWalletFirst": "请先连接钱包",
+      "claimFailed": "领取失败",
+      "copyReferralLinkFailed": "复制推荐链接失败"
+    },
+    "messages": {
+      "taskVerified": "任务验证成功！",
+      "airdropClaimed": "空投领取成功！",
+      "referralLinkCopied": "推荐链接已复制到剪贴板！"
+    }
+  },
+  "nft": {
+    "title": "🛡️ YesCoin Guardian NFT 系列",
+    "description": {
+      "intro": "<span class='text-yellow-400 font-bold'>YesCoin Guardian</span> 是 YesCoin 宇宙的限量NFT系列，总计 <span class='text-cyan-400 font-bold'>{{maxSupply}}</span> 个。每一枚 Guardian 都是精心设计的像素形象，灵感源自科幻和经典游戏——有的威武如银河战士，有的诙谐似太空冒险者。",
+      "benefits": "Guardian NFT 不仅是收藏品，更代表了 <span class='text-yellow-400 font-bold'>YesCoin 社区的荣耀勋章</span>！每个持有者都将成为 YesCoin 生态的核心建设者，享受专属权益和无限可能。"
+    },
+    "preview": {
+      "title": "🌌 Guardian 宇宙系列预览",
+      "description": "每个 Guardian 都拥有独特的像素形象和稀有属性"
+    },
+    "minting": {
+      "progressTitle": "🎯 铸造进度",
+      "minted": "已铸造",
+      "progress": "进度: {{progress}}% 完成",
+      "price": "💰 铸造价格",
+      "remaining": "⏰ 剩余数量",
+      "minting": "铸造中...",
+      "soldOut": "已售罄",
+      "mintButton": "🚀 立即铸造 Guardian NFT",
+      "notice": "💡 每个钱包限制铸造 5 个 NFT | ⚡ 支持 BSC 网络"
+    },
+    "referral": {
+      "title": "邀请好友，同享荣耀 🤑",
+      "description": "通过你的专属邀请链接，好友每成功铸造 1 个 NFT，你将获得 <strong>1,000,000 枚 YES 代币</strong> 空投奖励！",
+      "rewards": {
+        "title": "推荐奖励：",
+        "token": "• 每邀请1人：1,000,000 YES代币"
+      },
+      "invited": "• 您已邀请：{{count}} 人",
+      "yourLink": "您的邀请链接：",
+      "connectWalletHint": "连接钱包后即可获得专属邀请链接"
+    },
+    "benefits": {
+      "title": "💎 Guardian 持有者专属权益",
+      "staking": {
+        "title": "🚀 质押挖矿收益加成",
+        "description": "持有 Guardian NFT 可获得 20% 质押挖矿收益加成"
+      },
+      "airdrop": {
+        "title": "🎁 空投任务额外奖励",
+        "description": "参与空投活动时获得额外代币奖励"
+      },
+      "governance": {
+        "title": "🗳️ 社区治理投票权",
+        "description": "参与项目重大决策的投票权"
+      },
+      "exclusive": {
+        "title": "🌟 独家活动参与资格",
+        "description": "优先参与限量活动和新功能体验"
+      },
+      "permanent": {
+        "title": "🌟 持有即享受，权益永久有效！",
+        "description": "Guardian NFT 不仅是数字艺术品，更是您在 YesCoin 生态中的身份象征。随着生态发展，持有者将享受更多独家权益和收益机会。"
+      }
+    },
+    "messages": {
+      "mintSuccess": "NFT 铸造成功！",
+      "linkCopied": "邀请链接已复制到剪贴板"
+    },
+    "errors": {
+      "mintFailed": "铸造失败，请重试"
+    }
+  },
+  "tokenInfo": {
+    "title": "YES代币信息",
+    "subtitle": "了解YesCoin的详细信息和经济模型",
+    "overview": {
+      "title": "代币概览",
+      "tokenName": "代币名称",
+      "tokenSymbol": "代币符号",
+      "blockchain": "区块链",
+      "decimals": "代币精度",
+      "totalSupply": "总供应量",
+      "contractAddress": "合约地址"
+    },
+    "messages": {
+      "addressCopied": "地址已复制到剪贴板"
+    },
+    "distribution": {
+      "title": "代币分配方案",
+      "community": "100% 社区发行",
+      "fairLaunch": "无团队预留，公平发行"
+    },
+    "chart": {
+      "title": "价格走势图表"
+    },
+    "metrics": {
+      "title": "关键市场指标",
+      "currentPrice": "当前价格",
+      "change24h": "24h 变化",
+      "marketCap": "市值",
+      "volume24h": "24h 交易量",
+      "circulatingSupply": "流通供应量",
+      "fdv": "FDV"
+    },
+    "economics": {
+      "title": "YesCoin 经济模型详解",
+      "fairLaunch": {
+        "title": "公平发行理念",
+        "description": "YesCoin 采用 100% 社区发行模式，无团队预留、无私募、无预挖。所有代币通过社区活动、任务完成、NFT 铸造等方式公平分发给用户，确保每个参与者都有平等的获得机会。"
+      },
+      "trading": {
+        "title": "交易机制",
+        "description": "基于 BSC 网络的智能合约，支持去中心化交易。代币可在 PancakeSwap 等 DEX 平台自由交易，流动性由社区提供和维护，交易手续费低廉，转账速度快。"
+      },
+      "liquidity": {
+        "title": "初始流动性来源",
+        "description": "项目启动时的初始流动性将通过 NFT 铸造收入提供。每次 Guardian NFT 铸造的收益将按比例注入 YesCoin/BNB 交易对，为代币提供稳定的流动性基础。"
+      },
+      "future": {
+        "title": "未来发展规划",
+        "description": "随着生态发展，YesCoin 将逐步引入质押挖矿、流动性挖矿、治理投票等 DeFi 功能。持有者可通过参与生态建设获得更多收益，同时享有项目治理权。"
+      }
+    },
+    "advantages": {
+      "title": "YesCoin 核心优势",
+      "fairDistribution": {
+        "title": "🎯 公平分发",
+        "description": "无预挖、无私募，100% 社区公平获得"
+      },
+      "lowCost": {
+        "title": "⚡ 低成本交易",
+        "description": "基于 BSC 网络，交易费用低廉"
+      },
+      "security": {
+        "title": "🔒 安全可靠",
+        "description": "智能合约经过严格审计，资金安全有保障"
+      },
+      "ecosystem": {
+        "title": "🚀 生态丰富",
+        "description": "NFT、DeFi、游戏等多元化应用场景"
+      }
+    },
+    "actions": {
+      "readWhitepaper": "阅读白皮书",
+      "refreshData": "刷新数据"
+    },
+    "descriptions": {
+      "communityDistributionDesc": "所有代币完全用于社区，无团队预留份额",
+      "noPrivateSaleDesc": "拒绝内部人利益，保证社区主导权",
+      "transparentOpenDesc": "所有分配过程完全透明，可在区块链上验证",
+      "zeroTradingTaxDesc": "买卖无任何手续费，纯净交易体验",
+      "noInflationMechanismDesc": "总量固定，不会增发稀释持有者权益",
+      "communityDrivenDesc": "完全由社区自主发展，无中心化控制",
+      "pancakeSwapPoolDesc": "开发团队自筹资金建立YES-BNB流动性池",
+      "liquidityLockedDesc": "LP代币已锁定，确保交易安全稳定",
+      "securityGuaranteeDesc": "通过DXLock平台锁仓，可公开验证",
+      "lockProofDesc": "可在BSCScan查看流动性锁定状态",
+      "governanceVotingDesc": "持有者参与社区重大决策投票",
+      "gamePaymentDesc": "在生态游戏中作为支付和奖励代币",
+      "ecosystemExpansionDesc": "逐步构建完整的DeFi生态系统"
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "关于 YesCoin 项目的常见问题解答，帮助您更好地了解我们的愿景和技术",
+    "items": {
+      "whatIsYesCoin": {
+        "question": "什么是 YesCoin？",
+        "answer": "YesCoin 是一个基于 BSC 网络的社区驱动型代币项目。我们致力于通过公平分发、零手续费交易和丰富的生态应用，为用户创造真正的价值。项目采用 100% 社区发行模式，无团队预留，确保每个参与者都能公平获得代币。"
+      },
+      "howToBuy": {
+        "question": "如何购买 YesCoin 代币？",
+        "answer": "您可以通过以下方式获得 YesCoin：1) 完成每日任务和挑战获得奖励；2) 参与社区活动和推广；3) 铸造 Guardian NFT 获得代币奖励；4) 在 PancakeSwap 等 DEX 平台直接购买。我们建议新用户先通过任务系统熟悉项目。"
+      },
+      "nftUtility": {
+        "question": "Guardian NFT 有什么用途？",
+        "answer": "Guardian NFT 是 YesCoin 生态的核心组成部分，持有者享有多重权益：1) 质押挖矿收益加成 20%；2) 空投任务额外奖励；3) 社区治理投票权；4) 独家活动参与资格；5) 未来 DeFi 功能优先体验权。每个 NFT 都有独特的稀有属性和像素艺术设计。"
+      },
+      "tokenomics": {
+        "question": "代币经济模型是怎样的？",
+        "answer": "YesCoin 采用通缩经济模型：总供应量 1000 亿枚，100% 通过社区活动分发。代币用途包括：生态治理投票、质押挖矿、NFT 铸造、交易手续费抵扣等。我们通过多种机制确保代币价值稳定增长，包括回购销毁、流动性锁定等。"
+      },
+      "governance": {
+        "question": "如何参与社区治理？",
+        "answer": "持有 YesCoin 代币或 Guardian NFT 的用户都可以参与社区治理：1) 提出改进提案；2) 参与投票决策；3) 加入社区讨论；4) 贡献代码和创意。我们采用去中心化治理模式，重大决策都由社区投票决定，确保项目发展符合所有参与者的利益。"
+      },
+      "security": {
+        "question": "项目的安全性如何保障？",
+        "answer": "我们高度重视项目安全：1) 智能合约经过专业审计；2) 流动性永久锁定；3) 多重签名钱包管理；4) 定期安全检查和更新；5) 透明的资金使用报告。所有代码开源，接受社区监督，确保项目长期稳定发展。"
+      },
+      "support": {
+        "question": "如何获得技术支持？",
+        "answer": "我们提供多渠道技术支持：1) 官方 Telegram 群组实时答疑；2) Discord 社区技术讨论；3) 官网在线客服系统；4) GitHub 技术文档和 FAQ；5) 定期举办 AMA 活动。我们的技术团队 7x24 小时在线，确保用户问题得到及时解决。"
+      },
+      "roadmap": {
+        "question": "未来发展规划是什么？",
+        "answer": "YesCoin 的发展路线图包括：Q1 - 完善基础设施和 NFT 系统；Q2 - 推出质押挖矿和流动性挖矿；Q3 - 开发链游和元宇宙应用；Q4 - 跨链桥接和多链部署。我们致力于构建一个完整的 Web3 生态系统，为用户提供多样化的应用场景。"
+      }
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "confirm": "确认",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "submit": "提交",
+    "connecting": "连接中...",
+    "disconnect": "断开",
+    "disconnectWallet": "断开连接",
+    "connectWallet": "连接钱包",
+    "buyYes": "购买 YES",
+    "menu": "菜单",
+    "retry": "重试",
+    "close": "关闭",
+    "unknownError": "发生未知错误",
+    "web3ConnectionError": "Web3连接错误",
+    "walletConnectionProblem": "钱包连接出现问题，请刷新页面重试",
+    "refreshPage": "刷新页面",
+    "metaMaskNotFound": "未找到MetaMask连接器",
+    "walletConnectNotFound": "未找到WalletConnect连接器",
+    "walletNotConnected": "钱包未连接",
+    "contractRequiredParams": "需要签名器、合约地址和ABI",
+    "loadContractDataFailed": "加载合约数据失败:",
+    "mintingFailed": "铸造失败:",
+    "getTaskStatusFailed": "获取任务状态失败:",
+      "taskVerificationFailed": "任务验证失败:",
+      "claimFailed": "领取失败:",
+      "copyReferralLinkFailed": "复制推荐链接失败:",
+      "referralRewardDescription": "每成功推荐一人可获得额外奖励",
+      "holdersCount": "持有者数量",
+      "dataUpdateTime": "数据更新时间",
+      "realTimeUpdate": "实时更新 • 数据来源: BSCScan",
+      "realTimePriceChart": "实时价格图表",
+      "integrateChart": "集成DEXTools或PancakeSwap图表",
+      "chartPlaceholder": "📊 此处将显示YES-BNB交易对的实时K线图",
+      "dataSource": "数据来源: PancakeSwap / DEXTools",
+      "bscNetwork": "BSC (币安智能链)",
+      "communityDistribution": "社区发行",
+      "communityDistributionFull": "100% 社区分发",
+      "noPrivateSale": "无私募预售",
+      "transparentOpen": "透明公开",
+      "zeroTradingTax": "零交易税",
+      "noInflationMechanism": "无通胀机制",
+      "communityDriven": "社区驱动",
+      "pancakeSwapPool": "PancakeSwap池",
+      "liquidityLocked": "流动性锁定",
+      "securityGuarantee": "安全保障",
+      "lockProof": "锁仓证明",
+      "governanceVoting": "治理投票",
+      "gamePayment": "游戏支付",
+      "ecosystemExpansion": "生态扩展"
+  }
+}

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 import { useAccount, useConnect, useDisconnect, useWalletClient } from 'wagmi'
-import { walletConnect, metaMask } from 'wagmi/connectors'
+import { useTranslation } from 'react-i18next'
 
 const Web3Context = createContext()
 
@@ -14,6 +14,7 @@ export const useWeb3 = () => {
 }
 
 export const Web3Provider = ({ children }) => {
+  const { t } = useTranslation()
   const [provider, setProvider] = useState(null)
   const [signer, setSigner] = useState(null)
   const [isInitialized, setIsInitialized] = useState(false)
@@ -67,11 +68,11 @@ export const Web3Provider = ({ children }) => {
       setIsConnecting(true)
       setError(null)
       
-      const metaMaskConnector = connectors.find(c => c.id === 'metaMask')
+      const metaMaskConnector = connectors.find(c => c.id === 'injected' || c.name?.toLowerCase().includes('metamask'))
       if (metaMaskConnector) {
         await connect({ connector: metaMaskConnector })
       } else {
-        throw new Error('MetaMask connector not found')
+        throw new Error(t('common.metaMaskNotFound'))
       }
     } catch (err) {
       console.error('Failed to connect MetaMask:', err)
@@ -87,11 +88,11 @@ export const Web3Provider = ({ children }) => {
       setIsConnecting(true)
       setError(null)
       
-      const wcConnector = connectors.find(c => c.id === 'walletConnect')
+      const wcConnector = connectors.find(c => c.id === 'walletConnect' || c.name?.toLowerCase().includes('walletconnect'))
       if (wcConnector) {
         await connect({ connector: wcConnector })
       } else {
-        throw new Error('WalletConnect connector not found')
+        throw new Error(t('common.walletConnectNotFound'))
       }
     } catch (err) {
       console.error('Failed to connect WalletConnect:', err)
@@ -133,7 +134,7 @@ export const Web3Provider = ({ children }) => {
   // Contract interaction helper
   const getContract = (contractAddress, abi) => {
     if (!signer || !contractAddress || !abi) {
-      throw new Error('Signer, contract address, and ABI are required')
+      throw new Error(t('common.contractRequiredParams'))
     }
     return new ethers.Contract(contractAddress, abi, signer)
   }
@@ -141,7 +142,7 @@ export const Web3Provider = ({ children }) => {
   // Send transaction helper
   const sendTransaction = async (to, value = '0', data = '0x') => {
     if (!signer) {
-      throw new Error('Wallet not connected')
+      throw new Error(t('common.walletNotConnected'))
     }
     
     const tx = {

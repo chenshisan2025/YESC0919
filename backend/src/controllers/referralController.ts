@@ -130,52 +130,13 @@ export class ReferralController {
     }
   }
 
-  // POST /api/referrals/claim-bnb/:rewardId - Claim BNB reward
+  // POST /api/referrals/claim-bnb/:rewardId - Claim BNB reward (DISABLED)
+  // BNB rewards have been removed from the system
   async claimBnbReward(req: AuthenticatedRequest, res: Response): Promise<void> {
-    try {
-      const userId = req.user?.id;
-      const { rewardId } = req.params;
-
-      if (!userId) {
-        res.status(401).json({
-          success: false,
-          error: 'User not authenticated'
-        });
-        return;
-      }
-
-      if (!rewardId) {
-        res.status(400).json({
-          success: false,
-          error: 'Reward ID is required'
-        });
-        return;
-      }
-
-      const result = await referralService.claimBnbReward(rewardId);
-
-      if (!result.success) {
-        res.status(400).json({
-          success: false,
-          error: result.error
-        });
-        return;
-      }
-
-      res.json({
-        success: true,
-        data: {
-          transactionHash: result.data
-        },
-        message: 'BNB reward claimed successfully'
-      });
-    } catch (error) {
-      console.error('Claim BNB reward error:', error);
-      res.status(500).json({
-        success: false,
-        error: 'Internal server error'
-      });
-    }
+    res.status(404).json({
+      success: false,
+      error: 'BNB rewards are no longer available. Only YES token rewards are supported.'
+    });
   }
 
   // POST /api/referrals/process-airdrop-reward - Process referral reward for airdrop claim

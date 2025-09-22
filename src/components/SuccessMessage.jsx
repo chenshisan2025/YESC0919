@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // 成功消息组件
 const SuccessMessage = ({ 
   message, 
-  onDismiss = null, 
-  autoHide = true, 
+  onClose = null, 
+  autoClose = true, 
   duration = 3000,
-  className = '' 
+  className = ''
 }) => {
+  const { t } = useTranslation();
   useEffect(() => {
     if (autoHide && onDismiss && message) {
       const timer = setTimeout(() => {
@@ -28,7 +30,7 @@ const SuccessMessage = ({
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-green-800">成功</h3>
+          <h3 className="text-sm font-medium text-green-800">{t('common.success')}</h3>
           <p className="mt-1 text-sm text-green-700">{message}</p>
         </div>
         {onDismiss && (

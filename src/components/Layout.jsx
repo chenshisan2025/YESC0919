@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useWeb3 } from '../contexts/Web3Context'
 import logo from '../assets/logo.svg'
 import twitter from '../assets/twitter.svg'
@@ -16,6 +17,7 @@ export default function Layout({ children }) {
 }
 
 function Header() {
+  const { t, i18n } = useTranslation()
   const { 
     isConnected, 
     address, 
@@ -27,13 +29,28 @@ function Header() {
     error 
   } = useWeb3()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [lang, setLang] = useState('中文')
+
+  // 语言切换功能和持久化
+  const currentLang = i18n.language
+  const toggleLanguage = () => {
+    const newLang = currentLang === 'zh' ? 'en' : 'zh'
+    i18n.changeLanguage(newLang)
+    localStorage.setItem('language', newLang)
+  }
+
+  // 页面加载时恢复用户选择的语言
+  useEffect(() => {
+    const savedLang = localStorage.getItem('language')
+    if (savedLang && savedLang !== currentLang) {
+      i18n.changeLanguage(savedLang)
+    }
+  }, [])
 
   const WalletBtn = () => {
     if (isConnecting) {
       return (
         <button className="pixel-button-primary" disabled>
-          连接中...
+          {t('common.connecting')}
         </button>
       )
     }
@@ -47,12 +64,12 @@ function Header() {
           onClick={disconnect}
           className="pixel-button bg-red-500 hover:bg-red-600 text-white px-3 py-2 font-pixel text-sm"
         >
-          断开
+          {t('common.disconnect')}
         </button>
       </div>
     ) : (
       <button className="pixel-button-primary" onClick={connectMetaMask}>
-        连接钱包
+        {t('common.connectWallet')}
       </button>
     )
   }
@@ -66,42 +83,42 @@ function Header() {
         </Link>
 
         <nav className="hidden md:flex gap-6 font-press text-xs">
-          <NavLink className="pixel-nav-link" to="/">首页</NavLink>
-          <NavLink className="pixel-nav-link" to="/token">代币信息</NavLink>
-          <NavLink className="pixel-nav-link" to="/nft">NFT</NavLink>
-          <NavLink className="pixel-nav-link" to="/airdrop">空投</NavLink>
-          <NavLink className="pixel-nav-link" to="/faq">FAQ</NavLink>
+          <NavLink className="pixel-nav-link" to="/">{t('nav.home')}</NavLink>
+          <NavLink className="pixel-nav-link" to="/token">{t('nav.tokenInfo')}</NavLink>
+          <NavLink className="pixel-nav-link" to="/nft">{t('nav.nft')}</NavLink>
+          <NavLink className="pixel-nav-link" to="/airdrop">{t('nav.airdrop')}</NavLink>
+          <NavLink className="pixel-nav-link" to="/faq">{t('nav.faq')}</NavLink>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <button className="pixel-button-secondary" onClick={() => setLang(lang === '中文' ? 'EN' : '中文')}>
-            {lang}
+          <button className="pixel-button-secondary" onClick={toggleLanguage}>
+            {currentLang === 'zh' ? '中文' : 'EN'}
           </button>
-          <a className="pixel-button-secondary" target="_blank" href="https://pancakeswap.finance" rel="noreferrer">购买 YES</a>
+          <a className="pixel-button-secondary" target="_blank" href="https://pancakeswap.finance" rel="noreferrer">{t('common.buyYes')}</a>
           <WalletBtn />
         </div>
 
         <button className="md:hidden pixel-button-secondary" onClick={() => setMobileOpen(v=>!v)} aria-label="menu">
-          菜单
+          {t('common.menu')}
         </button>
       </div>
 
       {mobileOpen && (
         <div className="md:hidden border-t-2 border-brown bg-bg px-4 py-3 space-y-3">
           <div className="flex flex-col gap-2 font-press text-xs">
-            <NavLink className="pixel-nav-link" to="/" onClick={()=>setMobileOpen(false)}>首页</NavLink>
-            <NavLink className="pixel-nav-link" to="/token" onClick={()=>setMobileOpen(false)}>代币信息</NavLink>
-            <NavLink className="pixel-nav-link" to="/nft" onClick={()=>setMobileOpen(false)}>NFT</NavLink>
-            <NavLink className="pixel-nav-link" to="/airdrop" onClick={()=>setMobileOpen(false)}>空投</NavLink>
-            <NavLink className="pixel-nav-link" to="/faq" onClick={()=>setMobileOpen(false)}>FAQ</NavLink>
+            <NavLink className="pixel-nav-link" to="/" onClick={()=>setMobileOpen(false)}>{t('nav.home')}</NavLink>
+            <NavLink className="pixel-nav-link" to="/token" onClick={()=>setMobileOpen(false)}>{t('nav.tokenInfo')}</NavLink>
+            <NavLink className="pixel-nav-link" to="/nft" onClick={()=>setMobileOpen(false)}>{t('nav.nft')}</NavLink>
+            <NavLink className="pixel-nav-link" to="/airdrop" onClick={()=>setMobileOpen(false)}>{t('nav.airdrop')}</NavLink>
+            <NavLink className="pixel-nav-link" to="/faq" onClick={()=>setMobileOpen(false)}>{t('nav.faq')}</NavLink>
           </div>
           <div className="flex items-center gap-2 pt-2">
-            <a className="pixel-button-secondary w-full text-center" target="_blank" href="https://pancakeswap.finance" rel="noreferrer">购买 YES</a>
+            <a className="pixel-button-secondary w-full text-center" target="_blank" href="https://pancakeswap.finance" rel="noreferrer">{t('common.buyYes')}</a>
             <WalletMobile />
           </div>
           <div className="flex items-center gap-3 pt-1">
-            <button className="pixel-button-secondary" onClick={() => setLang(lang === '中文' ? 'EN' : '中文')}>
-              {lang}
+            <button className="pixel-button-secondary" onClick={toggleLanguage}>
+              {currentLang === 'zh' ? '中文' : 'EN'}
             </button>
             <a href="https://twitter.com" target="_blank" rel="noreferrer"><img className="w-5 h-5" src={twitter} alt="Twitter"/></a>
             <a href="https://t.me" target="_blank" rel="noreferrer"><img className="w-5 h-5" src={telegram} alt="Telegram"/></a>
@@ -113,6 +130,7 @@ function Header() {
 }
 
 function WalletMobile() {
+  const { t } = useTranslation()
   const { 
     isConnected, 
     address, 
@@ -126,7 +144,7 @@ function WalletMobile() {
   if (isConnecting) {
     return (
       <button className="pixel-button-primary w-full" disabled>
-        连接中...
+        {t('common.connecting')}
       </button>
     )
   }
@@ -140,7 +158,7 @@ function WalletMobile() {
         onClick={disconnect}
         className="pixel-button bg-red-500 hover:bg-red-600 text-white px-3 py-2 font-pixel text-sm"
       >
-        断开连接
+        {t('common.disconnectWallet')}
       </button>
       {error && (
         <div className="pixel-card bg-red-100 border border-red-400 text-red-700 px-3 py-2 text-sm">
@@ -150,7 +168,7 @@ function WalletMobile() {
     </div>
   ) : (
     <button className="pixel-button-primary w-full" onClick={connectMetaMask}>
-      连接钱包
+      {t('common.connectWallet')}
     </button>
   )
 }

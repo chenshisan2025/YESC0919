@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useWeb3 } from '../contexts/Web3Context'
 import { toast } from 'sonner'
+import { useTranslation } from 'react-i18next'
 
 const NFT = () => {
+  const { t } = useTranslation()
   const { isConnected, address, provider, connectMetaMask } = useWeb3()
   const [totalMinted, setTotalMinted] = useState(0)
   const [isMinting, setIsMinting] = useState(false)
@@ -33,7 +35,7 @@ const NFT = () => {
         setTotalMinted(Math.floor(Math.random() * 1000) + 500)
       }
     } catch (error) {
-      console.error('加载合约数据失败:', error)
+      console.error(t('common.loadContractDataFailed'), error)
     }
   }
 
@@ -64,12 +66,12 @@ const NFT = () => {
         
         // 模拟铸造
         await new Promise(resolve => setTimeout(resolve, 2000))
-        toast.success('NFT 铸造成功！')
+        toast.success(t('nft.messages.mintSuccess'))
         loadContractData()
       }
     } catch (error) {
-      console.error('铸造失败:', error)
-      toast.error('铸造失败，请重试')
+      console.error(t('common.mintingFailed'), error)
+      toast.error(t('nft.errors.mintFailed'))
     } finally {
       setIsMinting(false)
     }
@@ -78,7 +80,7 @@ const NFT = () => {
   // 复制邀请链接
   const copyInviteLink = () => {
     navigator.clipboard.writeText(inviteLink)
-    toast.success('邀请链接已复制到剪贴板')
+    toast.success(t('nft.messages.linkCopied'))
   }
 
   useEffect(() => {
@@ -99,7 +101,7 @@ const NFT = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          🛡️ YesCoin Guardian NFT 系列
+          {t('nft.title')}
         </motion.h1>
         
         <motion.div 
@@ -109,10 +111,10 @@ const NFT = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <p className="text-lg leading-relaxed text-gray-200 mb-4">
-            <span className="text-yellow-400 font-bold">YesCoin Guardian</span> 是 YesCoin 宇宙的限量NFT系列，总计 <span className="text-cyan-400 font-bold">{maxSupply.toLocaleString()}</span> 个。每一枚 Guardian 都是精心设计的像素形象，灵感源自科幻和经典游戏——有的威武如银河战士，有的诙谐似太空冒险者。
+            {t('nft.description.intro', { maxSupply: maxSupply.toLocaleString() })}
           </p>
           <p className="text-gray-300">
-            Guardian NFT 不仅是收藏品，更代表了 <span className="text-yellow-400 font-bold">YesCoin 社区的荣耀勋章</span>！每个持有者都将成为 YesCoin 生态的核心建设者，享受专属权益和无限可能。
+            {t('nft.description.benefits')}
           </p>
         </motion.div>
       </section>
@@ -128,7 +130,7 @@ const NFT = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="font-press text-lg mb-4 text-center text-purple-300">🌌 Guardian 宇宙系列预览</h3>
+          <h3 className="font-press text-lg mb-4 text-center text-purple-300">{t('nft.preview.title')}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <motion.div 
               className="aspect-square bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-lg p-2 border border-purple-400/30"
@@ -175,7 +177,7 @@ const NFT = () => {
               />
             </motion.div>
           </div>
-          <p className="text-xs text-gray-400 text-center mt-3">每个 Guardian 都拥有独特的像素形象和稀有属性</p>
+          <p className="text-xs text-gray-400 text-center mt-3">{t('nft.preview.description')}</p>
         </motion.div>
 
 
@@ -198,11 +200,11 @@ const NFT = () => {
               }}
               transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
             >
-              🎯 铸造进度
+              {t('nft.minting.progressTitle')}
             </motion.h3>
             <div className="mb-8 bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-xl p-6 border-2 border-purple-400/40">
               <div className="flex justify-between text-lg mb-4">
-                <span className="text-gray-200 font-semibold">已铸造</span>
+                <span className="text-gray-200 font-semibold">{t('nft.minting.minted')}</span>
                 <motion.span 
                   className="text-yellow-400 font-bold text-xl"
                   animate={{ 
@@ -250,7 +252,7 @@ const NFT = () => {
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                进度: {progress.toFixed(1)}% 完成
+                {t('nft.minting.progress', { progress: progress.toFixed(1) })}
               </motion.p>
             </div>
             
@@ -260,7 +262,7 @@ const NFT = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <p className="text-xs text-gray-400 mb-1">💰 铸造价格</p>
+                <p className="text-xs text-gray-400 mb-1">{t('nft.minting.price')}</p>
                 <p className="font-press text-lg text-green-400">{mintPrice} BNB</p>
               </motion.div>
               <motion.div 
@@ -268,7 +270,7 @@ const NFT = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <p className="text-xs text-gray-400 mb-1">⏰ 剩余数量</p>
+                <p className="text-xs text-gray-400 mb-1">{t('nft.minting.remaining')}</p>
                 <p className="font-press text-lg text-orange-400">{maxSupply - totalMinted}</p>
               </motion.div>
             </div>
@@ -290,14 +292,14 @@ const NFT = () => {
               {isMinting ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-                  铸造中...
+                  {t('nft.minting.minting')}
                 </div>
               ) : !isConnected ? (
-                '连接钱包'
+                t('common.connectWallet')
               ) : totalMinted >= maxSupply ? (
-                '已售罄'
+                t('nft.minting.soldOut')
               ) : (
-                '🚀 立即铸造 Guardian NFT'
+                t('nft.minting.mintButton')
               )}
             </motion.button>
             
@@ -307,7 +309,7 @@ const NFT = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.2 }}
             >
-              💡 每个钱包限制铸造 5 个 NFT &nbsp;|&nbsp; ⚡ 支持 BSC 网络
+              {t('nft.minting.notice')}
             </motion.p>
           </motion.div>
         </div>
@@ -315,16 +317,15 @@ const NFT = () => {
 
       {/* 邀请奖励区域 */}
       <section className="pixel-card p-6 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
-        <h2 className="font-press text-sm mb-2">邀请好友，同享荣耀 🤑</h2>
+        <h2 className="font-press text-sm mb-2">{t('nft.referral.title')}</h2>
         <p className="mb-3">
-          通过你的专属邀请链接，好友每成功铸造 1 个 NFT，你将获得 <strong>0.005 BNB</strong> 返佣奖励，以及 <strong>1,000,000 枚 YES 代币</strong> 空投奖励！
+          {t('nft.referral.description')}
         </p>
         <div className="bg-gray-800 rounded-lg p-4 mb-4">
-          <p className="text-yellow-400 font-bold mb-2">推荐奖励：</p>
-          <p className="text-green-400">• 每邀请1人：0.005 BNB</p>
-          <p className="text-green-400">• 每邀请1人：1,000,000 YES代币</p>
+          <p className="text-yellow-400 font-bold mb-2">{t('nft.referral.rewards.title')}</p>
+          <p className="text-green-400">{t('nft.referral.rewards.token')}</p>
           {isConnected && referralCount > 0 && (
-            <p className="text-blue-400 mt-2">• 您已邀请：{referralCount} 人</p>
+            <p className="text-blue-400 mt-2">{t('nft.referral.invited', { count: referralCount })}</p>
           )}
         </div>
         
@@ -335,7 +336,7 @@ const NFT = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-sm text-gray-400 mb-2">您的邀请链接：</p>
+            <p className="text-sm text-gray-400 mb-2">{t('nft.referral.yourLink')}</p>
             <div className="flex items-center gap-2">
               <input readOnly className="flex-1 bg-gray-700 text-white px-3 py-2 rounded text-sm" value={inviteLink} />
               <motion.button 
@@ -351,13 +352,13 @@ const NFT = () => {
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                复制
+                {t('common.copy')}
               </motion.button>
             </div>
           </motion.div>
         ) : (
           <div className="bg-gray-800 rounded-lg p-4">
-            <p className="text-gray-400 text-sm">连接钱包后即可获得专属邀请链接</p>
+            <p className="text-gray-400 text-sm">{t('nft.referral.connectWalletHint')}</p>
           </div>
         )}
       </section>
@@ -370,54 +371,51 @@ const NFT = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          💎 Guardian 持有者专属权益
+          {t('nft.benefits.title')}
         </motion.h2>
         
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg p-4 border border-green-400/20">
             <h3 className="font-bold text-green-300 mb-3 flex items-center">
-              <span className="mr-2">⚡</span>质押挖矿收益加成
+              <span className="mr-2">⚡</span>{t('nft.benefits.staking.title')}
             </h3>
             <p className="text-sm text-gray-300">
-              持有 Guardian NFT 可享受质押挖矿 <span className="text-yellow-400 font-bold">20% 收益加成</span>，
-              让您的 YES 代币获得更高回报。
+              {t('nft.benefits.staking.description')}
             </p>
           </div>
           
           <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-400/20">
             <h3 className="font-bold text-purple-300 mb-3 flex items-center">
-              <span className="mr-2">🎁</span>空投任务额外奖励
+              <span className="mr-2">🎁</span>{t('nft.benefits.airdrop.title')}
             </h3>
             <p className="text-sm text-gray-300">
-              完成社区空投任务时获得 <span className="text-yellow-400 font-bold">双倍奖励</span>，
-              优先参与新项目空投活动。
+              {t('nft.benefits.airdrop.description')}
             </p>
           </div>
           
           <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-lg p-4 border border-blue-400/20">
             <h3 className="font-bold text-blue-300 mb-3 flex items-center">
-              <span className="mr-2">🗳️</span>社区治理投票权
+              <span className="mr-2">🗳️</span>{t('nft.benefits.governance.title')}
             </h3>
             <p className="text-sm text-gray-300">
-              参与 YesCoin 生态重大决策投票，每个 Guardian NFT 拥有 <span className="text-yellow-400 font-bold">10 票投票权</span>，
-              共同塑造项目未来。
+              {t('nft.benefits.governance.description')}
             </p>
           </div>
           
           <div className="bg-gradient-to-r from-orange-900/30 to-red-900/30 rounded-lg p-4 border border-orange-400/20">
             <h3 className="font-bold text-orange-300 mb-3 flex items-center">
-              <span className="mr-2">🎪</span>独家活动参与资格
+              <span className="mr-2">🎪</span>{t('nft.benefits.exclusive.title')}
             </h3>
             <p className="text-sm text-gray-300">
-              优先参与线上线下独家活动，包括 <span className="text-yellow-400 font-bold">私人 AMA、限量商品抢购、游戏内测</span> 等特殊体验。
+              {t('nft.benefits.exclusive.description')}
             </p>
           </div>
         </div>
         
         <div className="mt-6 bg-yellow-900/20 rounded-lg p-4 border border-yellow-400/30">
-          <p className="text-yellow-300 font-bold text-center mb-2">🌟 持有即享受，权益永久有效！</p>
+          <p className="text-yellow-300 font-bold text-center mb-2">{t('nft.benefits.permanent.title')}</p>
           <p className="text-sm text-gray-300 text-center">
-            Guardian NFT 的所有权益将伴随您的持有期间持续生效，无需额外操作或费用。
+            {t('nft.benefits.permanent.description')}
           </p>
         </div>
       </section>

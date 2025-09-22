@@ -7,6 +7,7 @@ import Airdrop from './pages/Airdrop'
 import FAQ from './pages/FAQ'
 import { Web3Provider as Web3ModalProvider } from './components/Web3Provider'
 import { Web3Provider } from './contexts/Web3Context'
+import './i18n'
 
 function App() {
   return (

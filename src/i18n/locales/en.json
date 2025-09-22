@@ -1,0 +1,541 @@
+{
+  "nav": {
+    "home": "Home",
+    "tokenInfo": "Token Info",
+    "nft": "NFT",
+    "airdrop": "Airdrop",
+    "faq": "FAQ",
+    "buyYes": "Buy YES",
+    "connectWallet": "Connect Wallet",
+    "connecting": "Connecting...",
+    "disconnect": "Disconnect",
+    "language": "EN"
+  },
+  "home": {
+    "title": "YesCoin Web3 Universe",
+    "subtitle": "Embrace the Next Million-X Meme Legend!",
+    "description": "100% Fair Launch · Community Driven · Pixel Retro Meme Coin",
+    "joinButton": "Join the YES Revolution Now!",
+    "hero": {
+      "title": "YesCoin Web3 Universe",
+      "subtitle": "Embrace the Next Million-X Meme Legend!",
+      "tagline": "100% Fair Launch · Community Driven · Pixel Retro Meme Coin",
+      "description": "YesCoin is a brand new Meme universe born on the BSC chain. Here, there are no pre-sales, no team privileges, and every token is fairly distributed to the community! YesCoin aims to bring crypto enthusiasts together with humor and creativity. Pick up your YesCoin, say \"NO\" to mediocrity and \"YES\" to the future!",
+      "cta": "Join the YES Revolution Now!"
+    },
+    "features": {
+      "title": "Why Choose YesCoin?",
+      "fairLaunch": {
+        "title": "Fair Launch",
+        "desc": "100% community-driven, no pre-mining, no team allocation, truly decentralized token"
+      },
+      "pureMeme": {
+        "title": "Pure MEME",
+        "desc": "Focus on community culture building, making every holder a YesCoin evangelist"
+      },
+      "pixelStyle": {
+        "title": "Pixel Style",
+        "desc": "Unique pixel art design, paying tribute to classic gaming culture"
+      },
+      "communityDriven": {
+        "title": "Community Driven",
+        "desc": "Fully governed by the community, every holder has a voice"
+      },
+      "defi": {
+        "title": "DeFi Ecosystem",
+        "description": "Complete DeFi ecosystem including staking, liquidity mining, NFT and more"
+      }
+    },
+    "roadmap": {
+      "title": "Roadmap · Galactic Exploration",
+      "currentStage": "Current Stage",
+      "q4_2025": "NFT Series Launch, Community Building Kickoff",
+      "q1_2026": "DeFi Features Launch, Staking Mining Begins",
+      "q2_2026": "GameFi Development, Metaverse Integration",
+      "h2_2026": "Cross-chain Expansion, Ecosystem Completion",
+      "q1": {
+        "title": "2024 Q1",
+        "items": [
+          "Token Launch & Community Building",
+          "DEX Listing",
+          "Community Governance Launch"
+        ]
+      },
+      "q2": {
+        "title": "2024 Q2",
+        "items": [
+          "NFT Marketplace Development",
+          "Staking & Mining Features",
+          "Partnership Expansion"
+        ]
+      },
+      "q3": {
+        "title": "2024 Q3",
+        "items": [
+          "Cross-chain Bridge",
+          "Mobile Application",
+          "Ecosystem Expansion"
+        ]
+      },
+      "q4": {
+        "title": "2024 Q4",
+        "items": [
+          "Metaverse Integration",
+          "Global Marketing",
+          "Ecosystem Completion"
+        ]
+      }
+    },
+    "team": {
+      "title": "Core Team · Legendary Warriors",
+      "don": {
+        "name": "Don",
+        "role": "Project Founder"
+      },
+      "knight": {
+        "name": "Knight",
+        "role": "Chief Technology Officer"
+      },
+      "guard": {
+        "name": "Guard",
+        "role": "Security Expert"
+      },
+      "horn": {
+        "name": "Horn",
+        "role": "Community Manager"
+      },
+      "founder": {
+        "name": "Founder",
+        "role": "Blockchain Technology Expert"
+      },
+      "cto": {
+        "name": "CTO",
+        "role": "Full-stack Development Engineer"
+      },
+      "cmo": {
+        "name": "CMO",
+        "role": "Digital Marketing Expert"
+      }
+    },
+    "cta": {
+      "title": "Ready?",
+      "description": "Join the YesCoin universe and start your Web3 adventure!",
+      "button": "Mint NFT Now"
+    },
+    "stats": {
+      "holders": "Token Holders",
+      "marketCap": "Market Cap",
+      "totalSupply": "Total Supply",
+      "burned": "Burned",
+      "nftMinted": "NFTs Minted",
+      "airdropParticipants": "Airdrop Participants"
+    },
+    "community": {
+      "title": "Join Our Community",
+      "description": "YesCoin is not just a token, but a vibrant community. We believe in the power of decentralization and the wisdom of the community. Every YesCoin holder is an important part of our ecosystem.",
+      "joinTelegram": "Join Telegram",
+      "followTwitter": "Follow Twitter"
+    }
+  },
+  "airdrop": {
+    "title": "🪙 YesCoin Airdrop",
+    "subtitle": "Complete tasks and claim 10,000,000 YES tokens",
+    "welcomeBack": "Welcome back, {{address}}",
+    "startJourney": {
+      "title": "Start Your Airdrop Journey",
+      "description": "Connect your wallet and complete verification to start tasks and claim airdrop rewards"
+    },
+    "tasks": {
+      "title": "📋 Complete Tasks",
+      "completed": "Completed: {{completed}} / {{total}}",
+      "reward": "Reward",
+      "noTasks": "No available tasks",
+      "status": {
+        "completed": "Completed",
+        "verifying": "Verifying..."
+      },
+      "buttons": {
+        "goComplete": "Go Complete",
+        "verify": "Verify"
+      },
+      "twitter": {
+        "title": "Follow YesCoin Twitter",
+        "description": "Follow our official Twitter account for the latest updates"
+      },
+      "telegram": {
+        "title": "Join Telegram Group",
+        "description": "Join our Telegram community to interact with other users"
+      },
+      "discord": {
+        "title": "Join Discord Server",
+        "description": "Join our Discord community to participate in discussions"
+      },
+      "website": {
+        "title": "Visit Official Website",
+        "description": "Browse our official website to learn more"
+      }
+    },
+    "claim": {
+      "title": "🎁 Airdrop Claim",
+      "claimableAmount": "Claimable Amount",
+      "taskProgress": "Task Progress",
+      "history": {
+        "title": "📜 Claim History",
+        "noRecords": "No claim records",
+        "received": "Received"
+      }
+    },
+    "referral": {
+      "title": "👥 Referral System",
+      "referredUsers": "Referred Users",
+      "totalRewards": "Total Rewards",
+      "copyLink": "Copy Referral Link"
+    },
+    "stats": {
+      "title": "Airdrop Statistics",
+      "totalParticipants": "Total Participants",
+      "totalClaimed": "Total Claimed",
+      "totalDistributed": "Total Distributed",
+      "claimRate": "Claim Rate"
+    },
+    "buttons": {
+      "claiming": "Claiming...",
+      "completeAllTasks": "Complete All Tasks",
+      "claimTokens": "Claim 10,000,000 YES"
+    },
+    "errors": {
+      "connectWalletFirst": "Please connect wallet first",
+      "claimFailed": "Claim failed",
+      "copyReferralLinkFailed": "Failed to copy referral link"
+    },
+    "messages": {
+      "taskVerified": "Task verified successfully!",
+      "airdropClaimed": "Airdrop claimed successfully!",
+      "referralLinkCopied": "Referral link copied to clipboard!"
+    }
+  },
+  "nft": {
+    "title": "🛡️ YesCoin Guardian NFT Series",
+    "description": {
+      "intro": "<span class='text-yellow-400 font-bold'>YesCoin Guardian</span> is a limited NFT series in the YesCoin universe, with a total of <span class='text-cyan-400 font-bold'>{{maxSupply}}</span> pieces. Each Guardian is a carefully designed pixel character inspired by sci-fi and classic games - some mighty as galactic warriors, others whimsical as space adventurers.",
+      "benefits": "Guardian NFTs are not just collectibles, but represent the <span class='text-yellow-400 font-bold'>honor badge of the YesCoin community</span>! Each holder will become a core builder of the YesCoin ecosystem, enjoying exclusive benefits and unlimited possibilities."
+    },
+    "preview": {
+      "title": "🌌 Guardian Universe Series Preview",
+      "description": "Each Guardian has unique pixel art and rare attributes"
+    },
+    "minting": {
+      "progressTitle": "🎯 Minting Progress",
+      "minted": "Minted",
+      "progress": "Progress: {{progress}}% Complete",
+      "price": "💰 Mint Price",
+      "remaining": "⏰ Remaining",
+      "minting": "Minting...",
+      "soldOut": "Sold Out",
+      "mintButton": "🚀 Mint Guardian NFT Now",
+      "notice": "💡 5 NFTs per wallet limit | ⚡ BSC Network supported"
+    },
+    "referral": {
+      "title": "Invite Friends, Share Glory 🤑",
+      "description": "Through your exclusive referral link, for every successful NFT mint by your friends, you will receive <strong>1,000,000 YES tokens</strong> airdrop reward!",
+      "rewards": {
+        "title": "Referral Rewards:",
+        "token": "• Per referral: 1,000,000 YES tokens"
+      },
+      "invited": "• You have invited: {{count}} people",
+      "yourLink": "Your referral link:",
+      "connectWalletHint": "Connect wallet to get your exclusive referral link"
+    },
+    "benefits": {
+      "title": "💎 Guardian Holder Exclusive Benefits",
+      "staking": {
+        "title": "🚀 Staking Mining Bonus",
+        "description": "Guardian NFT holders enjoy 20% staking mining bonus"
+      },
+      "airdrop": {
+        "title": "🎁 Airdrop Task Extra Rewards",
+        "description": "Get extra token rewards when participating in airdrop activities"
+      },
+      "governance": {
+        "title": "🗳️ Community Governance Voting Rights",
+        "description": "Participate in voting on major project decisions"
+      },
+      "exclusive": {
+        "title": "🌟 Exclusive Activity Participation",
+        "description": "Priority access to limited activities and new feature experiences"
+      },
+      "permanent": {
+        "title": "🌟 Hold to Enjoy, Benefits Permanently Valid!",
+        "description": "Guardian NFT is not only a digital artwork, but also your identity symbol in the YesCoin ecosystem. As the ecosystem develops, holders will enjoy more exclusive benefits and earning opportunities."
+      }
+    },
+    "messages": {
+      "mintSuccess": "NFT minted successfully!",
+      "linkCopied": "Referral link copied to clipboard"
+    },
+    "errors": {
+      "mintFailed": "Minting failed, please try again"
+    }
+  },
+  "tokenInfo": {
+    "title": "YES Token Information",
+    "subtitle": "Learn about YesCoin's detailed information and economic model",
+    "overview": {
+      "title": "Token Overview",
+      "tokenName": "Token Name",
+      "tokenSymbol": "Token Symbol",
+      "blockchain": "Blockchain",
+      "decimals": "Token Decimals",
+      "totalSupply": "Total Supply",
+      "contractAddress": "Contract Address"
+    },
+    "messages": {
+      "addressCopied": "Address copied to clipboard"
+    },
+    "distribution": {
+      "title": "Token Distribution Plan",
+      "community": "100% Community Distribution",
+      "fairLaunch": "No team allocation, fair launch"
+    },
+    "chart": {
+      "title": "Price Chart"
+    },
+    "metrics": {
+      "title": "Key Market Metrics",
+      "currentPrice": "Current Price",
+      "change24h": "24h Change",
+      "marketCap": "Market Cap",
+      "volume24h": "24h Volume",
+      "circulatingSupply": "Circulating Supply",
+      "fdv": "FDV"
+    },
+    "economics": {
+      "title": "YesCoin Economic Model Details",
+      "fairLaunch": {
+        "title": "Fair Launch Philosophy",
+        "description": "YesCoin adopts a 100% community distribution model with no team allocation, no private sale, and no pre-mining. All tokens are fairly distributed to users through community activities, task completion, NFT minting, etc., ensuring equal opportunities for every participant."
+      },
+      "trading": {
+        "title": "Trading Mechanism",
+        "description": "Based on BSC network smart contracts, supporting decentralized trading. Tokens can be freely traded on DEX platforms like PancakeSwap, with liquidity provided and maintained by the community, low transaction fees, and fast transfer speeds."
+      },
+      "liquidity": {
+        "title": "Initial Liquidity Source",
+        "description": "Initial liquidity at project launch will be provided through NFT minting revenue. Each Guardian NFT minting revenue will be proportionally injected into the YesCoin/BNB trading pair, providing a stable liquidity foundation for the token."
+      },
+      "future": {
+        "title": "Future Development Plan",
+        "description": "As the ecosystem develops, YesCoin will gradually introduce staking mining, liquidity mining, governance voting and other DeFi functions. Holders can earn more rewards by participating in ecosystem construction while enjoying project governance rights."
+      }
+    },
+    "advantages": {
+      "title": "YesCoin Core Advantages",
+      "fairDistribution": {
+        "title": "🎯 Fair Distribution",
+        "description": "No pre-mining, no private sale, 100% community fair distribution"
+      },
+      "lowCost": {
+        "title": "⚡ Low-Cost Trading",
+        "description": "Based on BSC network, low transaction fees"
+      },
+      "security": {
+        "title": "🔒 Secure and Reliable",
+        "description": "Smart contracts audited rigorously, fund security guaranteed"
+      },
+      "ecosystem": {
+        "title": "🚀 Rich Ecosystem",
+        "description": "Diversified application scenarios including NFT, DeFi, gaming"
+      }
+    },
+    "actions": {
+      "readWhitepaper": "Read Whitepaper",
+      "refreshData": "Refresh Data"
+    },
+    "descriptions": {
+      "communityDistributionDesc": "All tokens are completely distributed to the community, with no team allocation",
+      "noPrivateSaleDesc": "Reject insider interests, ensure community dominance",
+      "transparentOpenDesc": "All distribution processes are completely transparent and verifiable on the blockchain",
+      "pancakeSwapPoolDesc": "Development team self-funded to establish YES-BNB liquidity pool",
+      "liquidityLockedDesc": "LP tokens are locked to ensure safe and stable trading",
+      "securityGuaranteeDesc": "Locked through DXLock platform, publicly verifiable",
+      "lockProofDesc": "Liquidity lock status can be viewed on BSCScan",
+      "zeroTradingTaxDesc": "No fees for buying or selling, pure trading experience",
+      "noInflationMechanismDesc": "Fixed total supply, no additional issuance to dilute holder interests",
+      "communityDrivenDesc": "Completely driven by community autonomy, no centralized control",
+      "governanceVotingDesc": "Holders participate in community major decision voting",
+      "gamePaymentDesc": "Used as payment and reward token in ecosystem games",
+      "ecosystemExpansionDesc": "Gradually build a complete DeFi ecosystem"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Common questions and answers about the YesCoin project to help you better understand our vision and technology",
+    "items": {
+      "whatIsYesCoin": {
+        "question": "What is YesCoin?",
+        "answer": "YesCoin is a community-driven token project based on the BSC network. We are committed to creating real value for users through fair distribution, zero transaction fees, and rich ecosystem applications. The project adopts a 100% community distribution model with no team allocation, ensuring that every participant can fairly obtain tokens."
+      },
+      "howToBuy": {
+        "question": "How to buy YesCoin tokens?",
+        "answer": "You can obtain YesCoin through the following ways: 1) Complete daily tasks and challenges to earn rewards; 2) Participate in community activities and promotion; 3) Mint Guardian NFTs to get token rewards; 4) Buy directly on DEX platforms like PancakeSwap. We recommend new users to first familiarize themselves with the project through the task system."
+      },
+      "nftUtility": {
+        "question": "What are the uses of Guardian NFT?",
+        "answer": "Guardian NFT is a core component of the YesCoin ecosystem, and holders enjoy multiple benefits: 1) 20% staking mining bonus; 2) Extra rewards for airdrop tasks; 3) Community governance voting rights; 4) Exclusive activity participation qualifications; 5) Priority access to future DeFi functions. Each NFT has unique rare attributes and pixel art design."
+      },
+      "tokenomics": {
+        "question": "What is the token economic model?",
+        "answer": "YesCoin adopts a deflationary economic model: total supply of 100 billion tokens, 100% distributed through community activities. Token uses include: ecosystem governance voting, staking mining, NFT minting, transaction fee deduction, etc. We ensure stable token value growth through various mechanisms, including buyback and burn, liquidity locking, etc."
+      },
+      "governance": {
+        "question": "How to participate in community governance?",
+        "answer": "Users holding YesCoin tokens or Guardian NFTs can participate in community governance: 1) Submit improvement proposals; 2) Participate in voting decisions; 3) Join community discussions; 4) Contribute code and ideas. We adopt a decentralized governance model where major decisions are decided by community voting, ensuring project development serves the interests of all participants."
+      },
+      "security": {
+        "question": "How is project security guaranteed?",
+        "answer": "We highly value project security: 1) Smart contracts professionally audited; 2) Liquidity permanently locked; 3) Multi-signature wallet management; 4) Regular security checks and updates; 5) Transparent fund usage reports. All code is open source and subject to community supervision, ensuring long-term stable project development."
+      },
+      "support": {
+        "question": "How to get technical support?",
+        "answer": "We provide multi-channel technical support: 1) Official Telegram group for real-time Q&A; 2) Discord community technical discussions; 3) Official website online customer service system; 4) GitHub technical documentation and FAQ; 5) Regular AMA events. Our technical team is online 7x24 hours to ensure user issues are resolved promptly."
+      },
+      "roadmap": {
+        "question": "What is the future development plan?",
+        "answer": "YesCoin's development roadmap includes: Q1 - Improve infrastructure and NFT system; Q2 - Launch staking mining and liquidity mining; Q3 - Develop chain games and metaverse applications; Q4 - Cross-chain bridging and multi-chain deployment. We are committed to building a complete Web3 ecosystem to provide users with diversified application scenarios."
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "connecting": "Connecting...",
+    "disconnect": "Disconnect",
+    "disconnectWallet": "Disconnect",
+    "connectWallet": "Connect Wallet",
+    "buyYes": "Buy YES",
+    "menu": "Menu",
+    "retry": "Retry",
+    "close": "Close",
+    "unknownError": "Unknown error occurred",
+    "web3ConnectionError": "Web3 Connection Error",
+    "walletConnectionProblem": "Wallet connection issue, please refresh the page and try again",
+    "refreshPage": "Refresh Page",
+    "metaMaskNotFound": "MetaMask connector not found",
+    "walletConnectNotFound": "WalletConnect connector not found",
+    "walletNotConnected": "Wallet not connected",
+    "contractRequiredParams": "Signer, contract address, and ABI are required",
+    "loadContractDataFailed": "Failed to load contract data:",
+    "mintingFailed": "Minting failed:",
+    "getTaskStatusFailed": "Failed to get task status:",
+      "taskVerificationFailed": "Task verification failed:",
+      "claimFailed": "Claim failed:",
+      "copyReferralLinkFailed": "Failed to copy referral link:",
+      "referralRewardDescription": "Get extra rewards for each successful referral",
+      "holdersCount": "Holders Count",
+      "dataUpdateTime": "Data Update Time",
+      "realTimeUpdate": "Real-time Update • Data Source: BSCScan",
+      "realTimePriceChart": "Real-time Price Chart",
+      "integrateChart": "Integrate DEXTools or PancakeSwap Chart",
+      "chartPlaceholder": "📊 YES-BNB trading pair real-time K-line chart will be displayed here",
+      "dataSource": "Data Source: PancakeSwap / DEXTools",
+      "bscNetwork": "BSC (Binance Smart Chain)",
+      "communityDistribution": "Community Distribution",
+      "communityDistributionFull": "100% Community Distribution",
+      "noPrivateSale": "No Private Sale",
+      "transparentOpen": "Transparent & Open",
+      "zeroTradingTax": "Zero Trading Tax",
+      "noInflationMechanism": "No Inflation Mechanism",
+      "communityDriven": "Community Driven",
+      "pancakeSwapPool": "PancakeSwap Pool",
+      "liquidityLocked": "Liquidity Locked",
+      "securityGuarantee": "Security Guarantee",
+      "lockProof": "Lock Proof",
+      "governanceVoting": "Governance Voting",
+      "gamePayment": "Game Payment",
+      "ecosystemExpansion": "Ecosystem Expansion",
+    "gettingTasks": "Getting task list...",
+    "getTasksSuccess": "Task list retrieved successfully",
+    "getTasksFailed": "Failed to get task list",
+    "completingTask": "Completing task",
+    "taskCompleteSuccess": "Task completed successfully",
+    "taskCompleteFailed": "Failed to complete task",
+    "backendSubmitFailed": "Backend task completion submission failed:",
+    "startWalletLogin": "Starting wallet login process...",
+    "gotNonce": "Got nonce:",
+    "requestUserSign": "Requesting user signature...",
+    "signSuccess": "Signature successful:",
+    "loginResponse": "Login response:",
+    "loginSuccess": "Login successful:",
+    "missingToken": "Missing token in login response",
+    "walletLoginFailed": "Wallet login failed:",
+    "userCancelledSign": "User cancelled signature, login cancelled",
+    "loginFailedRetry": "Login failed, please try again",
+    "tokenExpired": "Token expired or invalid",
+    "userLoggedOut": "User logged out",
+    "userNotLoggedIn": "User not logged in",
+    "getUserInfoFailed": "Failed to get user info:",
+    "getUserStatsFailed": "Failed to get user stats:",
+    "detectedReferral": "Detected referral link:",
+    "welcomeMessage": "Welcome to YesCoin!\n\nPlease sign to verify your wallet address.\n\nNonce: {nonce}\nAddress: {address}",
+    "checkingEligibility": "Checking airdrop eligibility...",
+    "eligibilityResult": "Airdrop eligibility check result:",
+    "checkEligibilityFailed": "Failed to check airdrop eligibility:",
+    "basicConditionsMet": "Basic conditions met",
+    "connectWallet": "Connect wallet",
+    "completeBasicTasks": "Complete basic tasks",
+    "startClaimAirdrop": "Starting airdrop claim...",
+    "alreadyClaimed": "You have already claimed the airdrop, each address can only claim once",
+    "notEligibleToClaim": "Not eligible to claim",
+    "airdropClaimSuccess": "Airdrop claim successful:",
+    "airdropClaimFailed": "Airdrop claim failed:",
+    "getClaimHistory": "Getting claim history...",
+    "claimHistorySuccess": "Claim history retrieved successfully:",
+    "getClaimHistoryFailed": "Failed to get claim history:",
+    "getAirdropStats": "Getting airdrop statistics...",
+    "airdropStatsSuccess": "Airdrop statistics retrieved successfully:",
+    "getAirdropStatsFailed": "Failed to get airdrop statistics:",
+    "simulateAirdropClaim": "Simulating airdrop claim...",
+    "checkingStatus": "Checking eligibility...",
+    "alreadyClaimedStatus": "Already claimed",
+    "notEligibleStatus": "Not eligible",
+    "cannotClaimNow": "Cannot claim now",
+    "canClaim": "Can claim",
+    "getReferralInfo": "Getting referral info...",
+    "referralInfoSuccess": "Referral info retrieved successfully:",
+    "getReferralInfoFailed": "Failed to get referral info:",
+    "getReferralRewards": "Getting referral rewards list...",
+    "referralRewardsSuccess": "Referral rewards list retrieved successfully:",
+    "getReferralRewardsFailed": "Failed to get referral rewards list:",
+    "cannotGenerateReferralLink": "Cannot generate referral link: user address is empty",
+    "generateReferralLink": "Generated referral link:",
+    "cannotGenerateLink": "Cannot generate referral link",
+    "referralLinkCopied": "Referral link copied to clipboard",
+    "copyReferralLinkFailed": "Failed to copy referral link:",
+    "referralLinkCopiedFallback": "Referral link copied to clipboard (fallback method)",
+    "fallbackCopyFailed": "Fallback copy method also failed:",
+    "copyFailedManual": "Copy failed, please copy the link manually",
+    "detectedValidReferral": "Detected valid referral link:",
+    "pendingStatus": "Pending",
+    "completedStatus": "Completed",
+    "failedStatus": "Failed",
+    "unknownStatus": "Unknown status",
+    "joinTelegramGroup": "Join Official Telegram Group",
+    "joinTelegramDesc": "Join YesCoin official Telegram group for latest updates",
+    "followTwitter": "Follow Twitter and Retweet Pinned Post",
+    "followTwitterDesc": "Follow @yescoin_official and retweet the pinned post",
+    "socialShare": "Post #YesCoin Topic on Social Media",
+    "socialShareDesc": "Post content with #YesCoin hashtag on any social platform",
+    "connectWalletTask": "Connect BEP20 Wallet Address",
+    "connectWalletTaskDesc": "Connect your BEP20 compatible wallet to receive tokens"
+  }
+}

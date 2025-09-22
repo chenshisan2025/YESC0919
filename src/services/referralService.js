@@ -1,5 +1,6 @@
 // NEW - 推荐系统服务
 import { referralAPI } from '../utils/api'
+import i18n from '../i18n'
 
 // 推荐系统状态管理
 class ReferralService {
@@ -26,7 +27,7 @@ class ReferralService {
   // 获取推荐信息
   async getReferralInfo() {
     try {
-      console.log('获取推荐信息...')
+      console.log(i18n.t('common.getReferralInfo'))
       const info = await referralAPI.getReferralInfo()
       
       this.referralInfo = {
@@ -39,11 +40,11 @@ class ReferralService {
         isReferred: !!info.referredBy
       }
       
-      console.log('推荐信息获取成功:', this.referralInfo)
+      console.log(i18n.t('common.referralInfoSuccess'), this.referralInfo)
       this.notifyListeners()
       return this.referralInfo
     } catch (error) {
-      console.error('获取推荐信息失败:', error)
+      console.error(i18n.t('common.getReferralInfoFailed'), error)
       
       // 设置默认推荐信息
       this.referralInfo = {
@@ -64,7 +65,7 @@ class ReferralService {
   // 获取推荐奖励列表
   async getReferralRewards() {
     try {
-      console.log('获取推荐奖励列表...')
+      console.log(i18n.t('common.getReferralRewards'))
       const rewards = await referralAPI.getReferralRewards()
       
       this.referralRewards = rewards.map(reward => ({
@@ -77,11 +78,11 @@ class ReferralService {
         claimedAt: reward.claimedAt
       }))
       
-      console.log('推荐奖励列表获取成功:', this.referralRewards)
+      console.log(i18n.t('common.referralRewardsSuccess'), this.referralRewards)
       this.notifyListeners()
       return this.referralRewards
     } catch (error) {
-      console.error('获取推荐奖励列表失败:', error)
+      console.error(i18n.t('common.getReferralRewardsFailed'), error)
       this.referralRewards = []
       this.notifyListeners()
       throw error
@@ -91,14 +92,14 @@ class ReferralService {
   // 生成推荐链接
   generateReferralLink(userAddress) {
     if (!userAddress) {
-      console.warn('无法生成推荐链接：用户地址为空')
+      console.warn(i18n.t('common.cannotGenerateReferralLink'))
       return null
     }
     
     const baseUrl = window.location.origin
     const referralLink = `${baseUrl}?referral=${userAddress}`
     
-    console.log('生成推荐链接:', referralLink)
+    console.log(i18n.t('common.generateReferralLink'), referralLink)
     return referralLink
   }
 
@@ -106,15 +107,15 @@ class ReferralService {
   async copyReferralLink(userAddress) {
     const link = this.generateReferralLink(userAddress)
     if (!link) {
-      throw new Error('无法生成推荐链接')
+      throw new Error(i18n.t('common.cannotGenerateLink'))
     }
     
     try {
       await navigator.clipboard.writeText(link)
-      console.log('推荐链接已复制到剪贴板')
+      console.log(i18n.t('common.referralLinkCopied'))
       return true
     } catch (error) {
-      console.error('复制推荐链接失败:', error)
+      console.error(i18n.t('common.copyReferralLinkFailed'), error)
       
       // 降级方案：使用传统方法复制
       try {
@@ -124,11 +125,11 @@ class ReferralService {
         textArea.select()
         document.execCommand('copy')
         document.body.removeChild(textArea)
-        console.log('推荐链接已复制到剪贴板（降级方案）')
+        console.log(i18n.t('common.referralLinkCopiedFallback'))
         return true
       } catch (fallbackError) {
-        console.error('降级复制方案也失败:', fallbackError)
-        throw new Error('复制失败，请手动复制链接')
+        console.error(i18n.t('common.fallbackCopyFailed'), fallbackError)
+        throw new Error(i18n.t('common.copyFailedManual'))
       }
     }
   }
@@ -141,7 +142,7 @@ class ReferralService {
     if (referralAddress && this.isValidAddress(referralAddress)) {
       // 存储推荐人地址
       localStorage.setItem('referral_address', referralAddress)
-      console.log('检测到有效推荐链接:', referralAddress)
+      console.log(i18n.t('common.detectedValidReferral'), referralAddress)
       
       // 清理URL参数
       const newUrl = window.location.pathname
@@ -179,13 +180,13 @@ class ReferralService {
   getReferralStatusText(status) {
     switch (status) {
       case 'pending':
-        return '待发放'
+        return i18n.t('common.pendingStatus')
       case 'completed':
-        return '已发放'
+        return i18n.t('common.completedStatus')
       case 'failed':
-        return '发放失败'
+        return i18n.t('common.failedStatus')
       default:
-        return '未知状态'
+        return i18n.t('common.unknownStatus')
     }
   }
 

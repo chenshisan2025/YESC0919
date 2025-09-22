@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, TrendingUp, Users, Coins, BarChart3, DollarSign, Copy, CheckCircle, Globe, Shield, Zap, Target } from 'lucide-react'
 import { useWeb3 } from '../contexts/Web3Context'
+import { useTranslation } from 'react-i18next'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 
@@ -9,6 +10,7 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const TokenInfo = () => {
   const { isConnected, provider } = useWeb3()
+  const { t } = useTranslation()
   const [tokenStats, setTokenStats] = useState({
     totalSupply: '1,000,000,000,000,000', // 1000万亿
     circulatingSupply: '500,000,000,000,000', // 500万亿
@@ -26,14 +28,14 @@ const TokenInfo = () => {
     name: 'YesCoin',
     symbol: 'YES',
     contractAddress: '0x1234567890123456789012345678901234567890', // 示例地址
-    blockchain: 'BSC (币安智能链)',
+    blockchain: t('common.bscNetwork'),
     decimals: 18,
     network: 'BNB Smart Chain'
   }
 
   // 分配方案饼图数据
   const distributionData = {
-    labels: ['社区发行'],
+    labels: [t('common.communityDistribution')],
     datasets: [
       {
         data: [100],
@@ -74,7 +76,7 @@ const TokenInfo = () => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      console.error('复制失败:', err)
+      console.error('Copy failed:', err)
     }
   }
 
@@ -98,7 +100,7 @@ const TokenInfo = () => {
         volume24h: '$' + Math.floor(Math.random() * 10000 + 1000).toLocaleString()
       })
     } catch (error) {
-      console.error('获取代币数据失败:', error)
+      console.error('Failed to fetch token data:', error)
     } finally {
       setLoading(false)
     }
@@ -119,10 +121,10 @@ const TokenInfo = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-            YES代币信息
+            {t('tokenInfo.title')}
           </h1>
           <p className="text-xl text-gray-300">
-            了解YesCoin的详细信息和经济模型
+            {t('tokenInfo.subtitle')}
           </p>
         </motion.div>
 
@@ -139,35 +141,35 @@ const TokenInfo = () => {
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
               <h2 className="text-2xl font-bold mb-6 flex items-center">
                 <Coins className="mr-3 text-green-400" size={28} />
-                代币概览
+                {t('tokenInfo.overview.title')}
               </h2>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-300">代币名称:</span>
+                  <span className="text-gray-300">{t('tokenInfo.overview.tokenName')}:</span>
                   <span className="font-semibold">{tokenInfo.name}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-300">代币符号:</span>
+                  <span className="text-gray-300">{t('tokenInfo.overview.tokenSymbol')}:</span>
                   <span className="font-semibold text-green-400">{tokenInfo.symbol}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-300">区块链:</span>
+                  <span className="text-gray-300">{t('tokenInfo.overview.blockchain')}:</span>
                   <span className="font-semibold flex items-center">
                     <Globe className="mr-1" size={16} />
                     {tokenInfo.blockchain}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-300">代币精度:</span>
+                  <span className="text-gray-300">{t('tokenInfo.overview.decimals')}:</span>
                   <span className="font-semibold">{tokenInfo.decimals}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-300">总供应量:</span>
+                  <span className="text-gray-300">{t('tokenInfo.overview.totalSupply')}:</span>
                   <span className="font-semibold">{tokenStats.totalSupply}</span>
                 </div>
                 <div className="border-t border-gray-600 pt-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300">合约地址:</span>
+                    <span className="text-gray-300">{t('tokenInfo.overview.contractAddress')}:</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <code className="bg-gray-700 px-3 py-2 rounded text-sm flex-1 truncate">
@@ -181,7 +183,7 @@ const TokenInfo = () => {
                     </button>
                   </div>
                   {copied && (
-                    <p className="text-green-400 text-sm mt-2">✓ 地址已复制到剪贴板</p>
+                    <p className="text-green-400 text-sm mt-2">✓ {t('tokenInfo.messages.addressCopied')}</p>
                   )}
                 </div>
               </div>
@@ -191,14 +193,14 @@ const TokenInfo = () => {
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
               <h3 className="text-xl font-bold mb-4 flex items-center">
                 <BarChart3 className="mr-3 text-green-400" size={24} />
-                代币分配方案
+                {t('tokenInfo.distribution.title')}
               </h3>
               <div className="h-64">
                 <Pie data={distributionData} options={chartOptions} />
               </div>
               <div className="mt-4 text-center">
-                <p className="text-green-400 font-semibold">100% 社区发行</p>
-                <p className="text-gray-300 text-sm mt-1">无团队预留，公平发行</p>
+                <p className="text-green-400 font-semibold">{t('tokenInfo.distribution.community')}</p>
+                <p className="text-gray-300 text-sm mt-1">{t('tokenInfo.distribution.fairLaunch')}</p>
               </div>
             </div>
           </motion.div>
@@ -214,22 +216,22 @@ const TokenInfo = () => {
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
               <h2 className="text-2xl font-bold mb-6 flex items-center">
                 <TrendingUp className="mr-3 text-green-400" size={28} />
-                价格走势图表
+                {t('tokenInfo.chart.title')}
               </h2>
               <div className="bg-gray-700/50 rounded-xl p-8 text-center">
                 <div className="mb-4">
                   <BarChart3 className="mx-auto text-green-400" size={64} />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">实时价格图表</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('common.realTimePriceChart')}</h3>
                 <p className="text-gray-300 mb-4">
-                  集成DEXTools或PancakeSwap图表
+                  {t('common.integrateChart')}
                 </p>
                 <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg p-4">
                   <p className="text-sm text-gray-300">
-                    📊 此处将显示YES-BNB交易对的实时K线图
+                    {t('common.chartPlaceholder')}
                   </p>
                   <p className="text-xs text-gray-400 mt-2">
-                    数据来源: PancakeSwap / DEXTools
+                    {t('common.dataSource')}
                   </p>
                 </div>
               </div>
@@ -239,36 +241,36 @@ const TokenInfo = () => {
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
               <h3 className="text-xl font-bold mb-6 flex items-center">
                 <DollarSign className="mr-3 text-green-400" size={24} />
-                关键市场指标
+                {t('tokenInfo.metrics.title')}
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">当前价格</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('tokenInfo.metrics.currentPrice')}</p>
                   <p className="text-2xl font-bold text-green-400">{tokenStats.price}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">24h交易量</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('tokenInfo.metrics.volume24h')}</p>
                   <p className="text-2xl font-bold text-blue-400">{tokenStats.volume24h}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">市值</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('tokenInfo.metrics.marketCap')}</p>
                   <p className="text-2xl font-bold text-purple-400">{tokenStats.marketCap}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">FDV</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('tokenInfo.metrics.fdv')}</p>
                   <p className="text-2xl font-bold text-yellow-400">{tokenStats.fdv}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">流通供给量</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('tokenInfo.metrics.circulatingSupply')}</p>
                   <p className="text-lg font-bold text-orange-400">{tokenStats.circulatingSupply}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center">
-                  <p className="text-gray-300 text-sm mb-1">持有者数量</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('common.holdersCount')}</p>
                   <p className="text-lg font-bold text-pink-400">{tokenStats.holders}</p>
                 </div>
                 <div className="bg-gray-700/50 rounded-xl p-4 text-center col-span-2">
-                  <p className="text-gray-300 text-sm mb-1">数据更新时间</p>
-                  <p className="text-sm text-gray-400">实时更新 • 数据来源: BSCScan</p>
+                  <p className="text-gray-300 text-sm mb-1">{t('common.dataUpdateTime')}</p>
+                  <p className="text-sm text-gray-400">{t('common.realTimeUpdate')}</p>
                 </div>
               </div>
             </div>
@@ -283,7 +285,7 @@ const TokenInfo = () => {
           className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 mb-12"
         >
           <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-            YesCoin 经济模型详解
+            {t('tokenInfo.economics.title')}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -292,20 +294,20 @@ const TokenInfo = () => {
               <div className="bg-gray-700/50 rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
                   <Shield className="mr-3 text-green-400" size={24} />
-                  公平发行理念
+                  {t('tokenInfo.economics.fairLaunch.title')}
                 </h3>
                 <div className="space-y-3 text-gray-300">
                   <p className="flex items-start">
                     <span className="text-green-400 mr-2">✓</span>
-                    <span><strong className="text-white">100% 社区分发：</strong>所有代币完全用于社区，无团队预留份额</span>
+                    <span><strong className="text-white">{t('common.communityDistributionFull')}：</strong>{t('tokenInfo.descriptions.communityDistributionDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-green-400 mr-2">✓</span>
-                    <span><strong className="text-white">无私募预售：</strong>拒绝内部人利益，保证社区主导权</span>
+                    <span><strong className="text-white">{t('common.noPrivateSale')}：</strong>{t('tokenInfo.descriptions.noPrivateSaleDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-green-400 mr-2">✓</span>
-                    <span><strong className="text-white">透明公开：</strong>所有分配过程完全透明，可在区块链上验证</span>
+                    <span><strong className="text-white">{t('common.transparentOpen')}：</strong>{t('tokenInfo.descriptions.transparentOpenDesc')}</span>
                   </p>
                 </div>
               </div>
@@ -313,20 +315,20 @@ const TokenInfo = () => {
               <div className="bg-gray-700/50 rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
                   <Zap className="mr-3 text-blue-400" size={24} />
-                  交易机制
+                  {t('tokenInfo.economics.trading.title')}
                 </h3>
                 <div className="space-y-3 text-gray-300">
                   <p className="flex items-start">
                     <span className="text-blue-400 mr-2">⚡</span>
-                    <span><strong className="text-white">零交易税：</strong>买卖无任何手续费，纯净交易体验</span>
+                    <span><strong className="text-white">{t('common.zeroTradingTax')}：</strong>{t('tokenInfo.descriptions.zeroTradingTaxDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-blue-400 mr-2">⚡</span>
-                    <span><strong className="text-white">无通胀机制：</strong>总量固定，不会增发稀释持有者权益</span>
+                    <span><strong className="text-white">{t('common.noInflationMechanism')}：</strong>{t('tokenInfo.descriptions.noInflationMechanismDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-blue-400 mr-2">⚡</span>
-                    <span><strong className="text-white">社区驱动：</strong>完全由社区自主发展，无中心化控制</span>
+                    <span><strong className="text-white">{t('common.communityDriven')}：</strong>{t('tokenInfo.descriptions.communityDrivenDesc')}</span>
                   </p>
                 </div>
               </div>
@@ -337,25 +339,25 @@ const TokenInfo = () => {
               <div className="bg-gray-700/50 rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
                   <DollarSign className="mr-3 text-purple-400" size={24} />
-                  初始流动性来源
+                  {t('tokenInfo.economics.liquidity.title')}
                 </h3>
                 <div className="space-y-3 text-gray-300">
                   <p className="flex items-start">
                     <span className="text-purple-400 mr-2">💧</span>
-                    <span><strong className="text-white">PancakeSwap池：</strong>开发团队自筹资金建立YES-BNB流动性池</span>
+                    <span><strong className="text-white">{t('common.pancakeSwapPool')}：</strong>{t('tokenInfo.descriptions.pancakeSwapPoolDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-purple-400 mr-2">🔒</span>
-                    <span><strong className="text-white">流动性锁定：</strong>LP代币已锁定，确保交易安全稳定</span>
+                    <span><strong className="text-white">{t('common.liquidityLocked')}：</strong>{t('tokenInfo.descriptions.liquidityLockedDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-purple-400 mr-2">🛡️</span>
-                    <span><strong className="text-white">安全保障：</strong>通过DXLock平台锁仓，可公开验证</span>
+                    <span><strong className="text-white">{t('common.securityGuarantee')}：</strong>{t('tokenInfo.descriptions.securityGuaranteeDesc')}</span>
                   </p>
                 </div>
                 <div className="mt-4 p-3 bg-purple-500/20 rounded-lg">
                   <p className="text-sm text-purple-300">
-                    <strong>锁仓证明：</strong> 可在BSCScan查看流动性锁定状态
+                    <strong>{t('common.lockProof')}：</strong> {t('tokenInfo.descriptions.lockProofDesc')}
                   </p>
                 </div>
               </div>
@@ -363,20 +365,20 @@ const TokenInfo = () => {
               <div className="bg-gray-700/50 rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
                   <Target className="mr-3 text-yellow-400" size={24} />
-                  未来发展规划
+                  {t('tokenInfo.economics.future.title')}
                 </h3>
                 <div className="space-y-3 text-gray-300">
                   <p className="flex items-start">
                     <span className="text-yellow-400 mr-2">🎯</span>
-                    <span><strong className="text-white">治理投票：</strong>持有者参与社区重大决策投票</span>
+                    <span><strong className="text-white">{t('common.governanceVoting')}：</strong>{t('tokenInfo.descriptions.governanceVotingDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-yellow-400 mr-2">🎮</span>
-                    <span><strong className="text-white">游戏支付：</strong>在生态游戏中作为支付和奖励代币</span>
+                    <span><strong className="text-white">{t('common.gamePayment')}：</strong>{t('tokenInfo.descriptions.gamePaymentDesc')}</span>
                   </p>
                   <p className="flex items-start">
                     <span className="text-yellow-400 mr-2">🌟</span>
-                    <span><strong className="text-white">生态扩展：</strong>逐步构建完整的DeFi生态系统</span>
+                    <span><strong className="text-white">{t('common.ecosystemExpansion')}：</strong>{t('tokenInfo.descriptions.ecosystemExpansionDesc')}</span>
                   </p>
                 </div>
               </div>
@@ -386,23 +388,23 @@ const TokenInfo = () => {
           {/* 核心优势总结 */}
           <div className="mt-8 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-xl p-6 border border-green-500/30">
             <h3 className="text-xl font-bold mb-4 text-center text-green-400">
-              YesCoin 核心优势
+              {t('tokenInfo.advantages.title')}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-2xl mb-2">🏆</div>
-                <h4 className="font-semibold text-white mb-1">公平发行</h4>
-                <p className="text-sm text-gray-300">100%社区分发，无团队预留</p>
+                <h4 className="font-semibold text-white mb-1">{t('tokenInfo.advantages.fairDistribution.title')}</h4>
+                <p className="text-sm text-gray-300">{t('tokenInfo.advantages.fairDistribution.description')}</p>
               </div>
               <div>
                 <div className="text-2xl mb-2">⚡</div>
-                <h4 className="font-semibold text-white mb-1">零手续费</h4>
-                <p className="text-sm text-gray-300">买卖无税，纯净交易</p>
+                <h4 className="font-semibold text-white mb-1">{t('tokenInfo.advantages.lowCost.title')}</h4>
+                <p className="text-sm text-gray-300">{t('tokenInfo.advantages.lowCost.description')}</p>
               </div>
               <div>
                 <div className="text-2xl mb-2">🔒</div>
-                <h4 className="font-semibold text-white mb-1">安全可靠</h4>
-                <p className="text-sm text-gray-300">流动性锁定，资金安全</p>
+                <h4 className="font-semibold text-white mb-1">{t('tokenInfo.advantages.security.title')}</h4>
+                <p className="text-sm text-gray-300">{t('tokenInfo.advantages.security.description')}</p>
               </div>
             </div>
           </div>
@@ -422,7 +424,7 @@ const TokenInfo = () => {
             className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-['Press_Start_2P'] text-sm px-8 py-4 rounded-lg transition-all duration-200 flex items-center gap-2"
           >
             <ExternalLink className="w-5 h-5" />
-            阅读白皮书
+            {t('tokenInfo.actions.readWhitepaper')}
           </button>
           
           <button 
@@ -431,7 +433,7 @@ const TokenInfo = () => {
             className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-600 disabled:to-gray-700 text-white font-['Press_Start_2P'] text-sm px-8 py-4 rounded-lg transition-all duration-200 flex items-center gap-2"
           >
             {loading && <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />}
-            刷新数据
+            {t('tokenInfo.actions.refreshData')}
           </button>
         </motion.div>
       </div>

@@ -3,14 +3,16 @@ import { motion } from 'framer-motion';
 import { useWeb3 } from '../contexts/Web3Context';
 import { toast } from 'sonner';
 import { Copy, ExternalLink, CheckCircle, Clock, Users, Gift, Twitter, MessageCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Airdrop = () => {
   const { isConnected, address, connectWallet } = useWeb3();
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: '关注 YesCoin Twitter',
-      description: '关注我们的官方 Twitter 账号',
+      title: t('airdrop.tasks.followTwitter.title'),
+      description: t('airdrop.tasks.followTwitter.description'),
       reward: '2,000,000 YES',
       completed: false,
       verified: false,
@@ -20,8 +22,8 @@ const Airdrop = () => {
     },
     {
       id: 2,
-      title: '加入 Telegram 群组',
-      description: '加入我们的官方 Telegram 社区',
+      title: t('airdrop.tasks.joinTelegram.title'),
+      description: t('airdrop.tasks.joinTelegram.description'),
       reward: '2,000,000 YES',
       completed: false,
       verified: false,
@@ -31,8 +33,8 @@ const Airdrop = () => {
     },
     {
       id: 3,
-      title: '转发推文',
-      description: '转发我们的置顶推文',
+      title: t('airdrop.tasks.retweetPost.title'),
+      description: t('airdrop.tasks.retweetPost.description'),
       reward: '3,000,000 YES',
       completed: false,
       verified: false,
@@ -42,8 +44,8 @@ const Airdrop = () => {
     },
     {
       id: 4,
-      title: '邀请好友',
-      description: '邀请至少 3 位好友完成任务',
+      title: t('airdrop.tasks.inviteFriends.title'),
+      description: t('airdrop.tasks.inviteFriends.description'),
       reward: '3,000,000 YES',
       completed: false,
       verified: false,
@@ -85,7 +87,7 @@ const Airdrop = () => {
         setReferralCount(data.referralCount || 0);
       }
     } catch (error) {
-      console.error('获取任务状态失败:', error);
+      console.error(t('common.getTaskStatusFailed'), error);
     } finally {
       setLoading(false);
     }
@@ -101,7 +103,7 @@ const Airdrop = () => {
   // 验证任务完成
   const verifyTask = async (taskId) => {
     if (!address) {
-      toast.error('请先连接钱包');
+      toast.error(t('airdrop.errors.connectWalletFirst'));
       return;
     }
 
@@ -130,16 +132,16 @@ const Airdrop = () => {
                 : task
             )
           );
-          toast.success('任务验证成功！');
+          toast.success(t('airdrop.messages.taskVerified'));
         } else {
-          toast.error(data.message || '任务验证失败');
+          toast.error(data.message || t('airdrop.errors.taskVerificationFailed'));
         }
       } else {
-        toast.error('验证请求失败');
+        toast.error(t('airdrop.errors.verificationRequestFailed'));
       }
     } catch (error) {
-      console.error('任务验证失败:', error);
-      toast.error('验证过程中出现错误');
+      console.error(t('common.taskVerificationFailed'), error);
+      toast.error(t('airdrop.errors.verificationError'));
     } finally {
       setLoading(false);
     }
@@ -180,7 +182,7 @@ const Airdrop = () => {
         if (referralCount >= 3) {
           await verifyTask(task.id);
         } else {
-          toast.error(`您需要邀请至少3位好友，当前已邀请${referralCount}位`);
+          toast.error(t('airdrop.errors.needMoreInvites', { current: referralCount, required: 3 }));
         }
       }
     }
@@ -194,7 +196,7 @@ const Airdrop = () => {
     }
 
     if (!airdropEligible) {
-      toast.error('请先完成所有任务');
+      toast.error(t('airdrop.errors.completeAllTasks'));
       return;
     }
 
@@ -224,8 +226,8 @@ const Airdrop = () => {
           
           setClaimHistory(prev => [newClaim, ...prev]);
           setTotalRewards(prev => prev + claimAmount);
-          setMessage('空投领取成功！');
-          toast.success(`🎉 成功领取 ${claimAmount.toLocaleString()} YES 代币！`);
+          setMessage(t('airdrop.messages.claimSuccess'));
+          toast.success(t('airdrop.messages.claimSuccessToast', { amount: claimAmount.toLocaleString() }));
           
           // 更新统计数据
           setUserStats(prev => ({
@@ -234,14 +236,14 @@ const Airdrop = () => {
             totalDistributed: (parseInt(prev.totalDistributed.replace(/,/g, '')) + claimAmount).toLocaleString()
           }));
         } else {
-          toast.error(data.message || '领取失败');
+          toast.error(data.message || t('airdrop.errors.claimFailed'));
         }
       } else {
-        toast.error('领取请求失败');
+        toast.error(t('airdrop.errors.claimRequestFailed'));
       }
     } catch (error) {
-      console.error('领取失败:', error);
-      toast.error('领取过程中出现错误');
+      console.error(t('common.claimFailed'), error);
+      toast.error(t('airdrop.errors.claimError'));
     } finally {
       setClaiming(false);
     }
@@ -250,17 +252,17 @@ const Airdrop = () => {
   // 复制推荐链接
   const handleCopyReferralLink = async () => {
     if (!address) {
-      toast.error('请先连接钱包');
+      toast.error(t('airdrop.errors.connectWalletFirst'));
       return;
     }
 
     try {
       const referralLink = `${window.location.origin}/?ref=${address}`;
       await navigator.clipboard.writeText(referralLink);
-      toast.success('推荐链接已复制到剪贴板！');
+      toast.success(t('airdrop.messages.referralLinkCopied'));
     } catch (error) {
-      console.error('复制推荐链接失败:', error);
-      toast.error('复制推荐链接失败');
+      console.error(t('common.copyReferralLinkFailed'), error);
+      toast.error(t('airdrop.errors.copyReferralLinkFailed'));
     }
   };
 
@@ -271,10 +273,10 @@ const Airdrop = () => {
 
   // 获取领取按钮文本
   const getClaimButtonText = () => {
-    if (claiming) return '领取中...';
-    if (!isConnected) return '连接钱包';
-    if (!canClaimAirdrop()) return '完成所有任务';
-    return '领取 10,000,000 YES';
+    if (claiming) return t('airdrop.buttons.claiming');
+    if (!isConnected) return t('common.connectWallet');
+    if (!canClaimAirdrop()) return t('airdrop.buttons.completeAllTasks');
+    return t('airdrop.buttons.claimTokens');
   };
 
   // 更新空投资格状态
@@ -303,11 +305,11 @@ const Airdrop = () => {
       <div className="max-w-6xl mx-auto">
         {/* 页面标题 */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">🪙 YesCoin 空投</h1>
-          <p className="text-lg text-gray-600">完成任务，领取 10,000,000 枚 YES 代币</p>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">{t('airdrop.title')}</h1>
+          <p className="text-lg text-gray-600">{t('airdrop.subtitle')}</p>
           {isConnected && address && (
             <div className="mt-4 text-sm text-gray-500">
-              欢迎回来，{address.slice(0, 6)}...{address.slice(-4)}
+              {t('airdrop.welcomeBack', { address: `${address.slice(0, 6)}...${address.slice(-4)}` })}
             </div>
           )}
         </div>
@@ -315,8 +317,8 @@ const Airdrop = () => {
         {!isConnected ? (
           /* 未连接钱包状态 */
           <div className="bg-white rounded-xl shadow-lg p-8 text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">开始您的空投之旅</h2>
-            <p className="text-gray-600 mb-6">连接钱包并完成认证，即可开始任务并领取空投奖励</p>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t('airdrop.startJourney.title')}</h2>
+            <p className="text-gray-600 mb-6">{t('airdrop.startJourney.description')}</p>
             <button 
               onClick={connectWallet}
               disabled={loading}
@@ -325,10 +327,10 @@ const Airdrop = () => {
               {loading ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  连接中...
+                  {t('common.connecting')}
                 </>
               ) : (
-                '连接钱包'
+                t('common.connectWallet')
               )}
             </button>
           </div>
@@ -338,9 +340,9 @@ const Airdrop = () => {
             {/* 任务列表 */}
             <div className="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-semibold text-gray-800">📋 完成任务</h2>
+                <h2 className="text-2xl font-semibold text-gray-800">{t('airdrop.tasks.title')}</h2>
                 <div className="text-sm text-gray-500">
-                  已完成: {tasks.filter(t => t.completed).length} / {tasks.length}
+                  {t('airdrop.tasks.completed', { completed: tasks.filter(t => t.completed).length, total: tasks.length })}
                 </div>
               </div>
               
@@ -366,7 +368,7 @@ const Airdrop = () => {
                             <p className="text-sm text-gray-600 mb-2">{task.description}</p>
                             <div className="flex items-center text-sm text-green-600">
                               <Gift className="w-4 h-4 mr-1" />
-                              奖励: {task.reward}
+                              {t('airdrop.tasks.reward')}: {task.reward}
                             </div>
                           </div>
                         </div>
@@ -375,7 +377,7 @@ const Airdrop = () => {
                           {task.completed ? (
                             <span className="text-green-600 font-medium flex items-center font-pixel">
                               <CheckCircle className="w-4 h-4 mr-1" />
-                              已完成
+                              {t('airdrop.tasks.status.completed')}
                             </span>
                           ) : (
                             <>
@@ -388,7 +390,7 @@ const Airdrop = () => {
                                   whileHover={{ scale: 1.05 }}
                                   whileTap={{ scale: 0.95 }}
                                 >
-                                  去完成
+                                  {t('airdrop.tasks.buttons.goComplete')}
                                   <ExternalLink className="w-3 h-3 ml-1" />
                                 </motion.a>
                               )}
@@ -402,10 +404,10 @@ const Airdrop = () => {
                                 {loading ? (
                                   <>
                                     <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
-                                    验证中
+                                    {t('airdrop.tasks.status.verifying')}
                                   </>
                                 ) : (
-                                  '验证'
+                                  t('airdrop.tasks.buttons.verify')
                                 )}
                               </motion.button>
                             </>
@@ -418,7 +420,7 @@ const Airdrop = () => {
                 
                 {tasks.length === 0 && (
                   <div className="text-center py-8 text-gray-500">
-                    暂无可用任务
+                    {t('airdrop.tasks.noTasks')}
                   </div>
                 )}
               </div>
@@ -436,12 +438,12 @@ const Airdrop = () => {
               >
                 <h2 className="text-xl font-pixel text-gold mb-4 flex items-center gap-2">
                   <Gift className="w-6 h-6" />
-                  空投领取
+                  {t('airdrop.claim.title')}
                 </h2>
                 
                 <div className="space-y-4">
                   <div className="pixel-card-inner p-4">
-                    <div className="text-sm text-brown/70 mb-2 font-pixel">可领取金额</div>
+                    <div className="text-sm text-brown/70 mb-2 font-pixel">{t('airdrop.claim.claimableAmount')}</div>
                     <div className="text-2xl font-bold text-gold font-pixel">
                       10,000,000 YES
                     </div>
@@ -450,7 +452,7 @@ const Airdrop = () => {
                   {/* 进度条 */}
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-brown/70 font-pixel">任务进度</span>
+                      <span className="text-brown/70 font-pixel">{t('airdrop.claim.taskProgress')}</span>
                       <span className="text-brown font-pixel">
                         {tasks.filter(t => t.completed).length} / {tasks.length}
                       </span>
@@ -480,7 +482,7 @@ const Airdrop = () => {
                   
                   {claimHistory.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-brown/20">
-                      <div className="text-sm text-brown/70 mb-2 font-pixel">领取历史</div>
+                      <div className="text-sm text-brown/70 mb-2 font-pixel">{t('airdrop.claim.history.title')}</div>
                       <div className="space-y-2 max-h-32 overflow-y-auto">
                         {claimHistory.slice(0, 3).map((claim) => (
                           <div key={claim.id} className="text-xs text-brown font-pixel flex justify-between">
@@ -504,19 +506,19 @@ const Airdrop = () => {
               >
                 <h2 className="text-xl font-pixel text-gold mb-4 flex items-center gap-2">
                   <Users className="w-6 h-6" />
-                  推荐系统
+                  {t('airdrop.referral.title')}
                 </h2>
                 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="pixel-card-inner p-3 text-center">
-                      <div className="text-sm text-brown/70 font-pixel">推荐人数</div>
+                      <div className="text-sm text-brown/70 font-pixel">{t('airdrop.referral.referredUsers')}</div>
                       <div className="text-xl font-bold text-orange font-pixel">
                         {referralCount}
                       </div>
                     </div>
                     <div className="pixel-card-inner p-3 text-center">
-                      <div className="text-sm text-brown/70 font-pixel">奖励总额</div>
+                      <div className="text-sm text-brown/70 font-pixel">{t('airdrop.referral.totalRewards')}</div>
                       <div className="text-xl font-bold text-magenta font-pixel">
                         {formatNumber(totalRewards)}
                       </div>
@@ -531,11 +533,11 @@ const Airdrop = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Copy className="w-4 h-4" />
-                    复制推荐链接
+                    {t('airdrop.referral.copyLink')}
                   </motion.button>
                   
                   <div className="text-xs text-brown/70 text-center font-pixel">
-                    每成功推荐一人可获得额外奖励
+                    {t('common.referralRewardDescription')}
                   </div>
                 </div>
               </motion.div>
@@ -549,27 +551,27 @@ const Airdrop = () => {
                 whileHover={{ scale: 1.02 }}
               >
                 <h2 className="text-xl font-pixel text-gold mb-4 flex items-center gap-2">
-                  📊 空投统计
+                  📊 {t('airdrop.stats.title')}
                 </h2>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-brown/70 font-pixel">总参与人数</span>
+                    <span className="text-brown/70 font-pixel">{t('airdrop.stats.totalParticipants')}</span>
                     <span className="font-semibold text-brown font-pixel">{formatNumber(userStats.totalParticipants)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-brown/70 font-pixel">已领取人数</span>
+                    <span className="text-brown/70 font-pixel">{t('airdrop.stats.totalClaimed')}</span>
                     <span className="font-semibold text-magenta font-pixel">{formatNumber(userStats.totalClaimed)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-brown/70 font-pixel">发放总量</span>
+                    <span className="text-brown/70 font-pixel">{t('airdrop.stats.totalDistributed')}</span>
                     <span className="font-semibold text-orange font-pixel">
                       {userStats.totalDistributed} YES
                     </span>
                   </div>
                   <div className="pt-2 border-t border-brown/20">
                     <div className="text-sm text-brown/70 text-center font-pixel">
-                      领取率: {((userStats.totalClaimed / userStats.totalParticipants) * 100).toFixed(1)}%
+                      {t('airdrop.stats.claimRate')}: {((userStats.totalClaimed / userStats.totalParticipants) * 100).toFixed(1)}%
                     </div>
                   </div>
                 </div>

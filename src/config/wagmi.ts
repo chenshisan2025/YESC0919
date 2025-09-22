@@ -70,7 +70,7 @@ export const config = defaultWagmiConfig({
   enableWalletConnect: true,
   enableInjected: true,
   enableEIP6963: true,
-  enableCoinbase: true,
+  enableCoinbase: false, // 禁用Coinbase钱包以避免错误
   enableEmail: false
 })
 

@@ -1,5 +1,6 @@
 // NEW - 任务管理服务
 import { taskAPI } from '../utils/api'
+import i18n from '../i18n'
 
 // 任务状态管理
 class TaskService {
@@ -22,7 +23,7 @@ class TaskService {
   // 获取任务列表
   async getTasks() {
     try {
-      console.log('获取任务列表...')
+      console.log(i18n.t('common.gettingTasks'))
       const tasks = await taskAPI.getTasks()
       
       // 转换任务数据格式以适配前端
@@ -37,11 +38,11 @@ class TaskService {
         link: this.getTaskLink(task)
       }))
       
-      console.log('任务列表获取成功:', this.tasks)
+      console.log(i18n.t('common.getTasksSuccess'), this.tasks)
       this.notifyListeners()
       return this.tasks
     } catch (error) {
-      console.error('获取任务列表失败:', error)
+      console.error(i18n.t('common.getTasksFailed'), error)
       
       // 如果API失败，返回默认任务
       this.tasks = this.getDefaultTasks()
@@ -53,7 +54,7 @@ class TaskService {
   // 完成任务
   async completeTask(taskId, verificationData = {}) {
     try {
-      console.log('完成任务:', taskId, verificationData)
+      console.log(i18n.t('common.completingTask'), taskId, verificationData)
       
       const result = await taskAPI.completeTask(taskId, verificationData)
       
@@ -65,10 +66,10 @@ class TaskService {
       )
       
       this.notifyListeners()
-      console.log('任务完成成功:', result)
+      console.log(i18n.t('common.taskCompleteSuccess'), result)
       return result
     } catch (error) {
-      console.error('完成任务失败:', error)
+      console.error(i18n.t('common.taskCompleteFailed'), error)
       throw error
     }
   }
@@ -84,7 +85,7 @@ class TaskService {
     
     // 异步提交到后端
     this.completeTask(taskId).catch(error => {
-      console.warn('后端任务完成提交失败:', error)
+      console.warn(i18n.t('common.backendSubmitFailed'), error)
       // 可以选择回滚本地状态或显示警告
     })
   }
@@ -112,8 +113,8 @@ class TaskService {
     return [
       {
         id: 1,
-        text: '加入官方 Telegram 群组',
-        description: '加入YesCoin官方Telegram群组获取最新消息',
+        text: i18n.t('common.joinTelegramGroup'),
+        description: i18n.t('common.joinTelegramDesc'),
         type: 'TELEGRAM_JOIN',
         url: 'https://t.me/yescoin_official',
         points: 1000,
@@ -122,8 +123,8 @@ class TaskService {
       },
       {
         id: 2,
-        text: '关注 Twitter 并转发置顶推文',
-        description: '关注@yescoin_official并转发置顶推文',
+        text: i18n.t('common.followTwitter'),
+        description: i18n.t('common.followTwitterDesc'),
         type: 'TWITTER_FOLLOW',
         url: 'https://twitter.com/yescoin_official',
         points: 1500,
@@ -132,8 +133,8 @@ class TaskService {
       },
       {
         id: 3,
-        text: '在社交平台发布 #YesCoin 话题',
-        description: '在任意社交平台发布包含#YesCoin话题的内容',
+        text: i18n.t('common.socialShare'),
+        description: i18n.t('common.socialShareDesc'),
         type: 'SOCIAL_SHARE',
         url: '#',
         points: 2000,
@@ -142,8 +143,8 @@ class TaskService {
       },
       {
         id: 4,
-        text: '连接 BEP20 钱包地址',
-        description: '连接您的BEP20兼容钱包以接收代币',
+        text: i18n.t('common.connectWalletTask'),
+        description: i18n.t('common.connectWalletTaskDesc'),
         type: 'WALLET_CONNECT',
         url: '#',
         points: 500,

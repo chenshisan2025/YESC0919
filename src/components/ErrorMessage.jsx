@@ -1,16 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // 错误消息组件
 const ErrorMessage = ({ 
   error, 
   onRetry = null, 
-  onDismiss = null, 
+  onClose = null, 
   className = '',
-  showRetry = true 
+  showActions = true 
 }) => {
+  const { t } = useTranslation();
   if (!error) return null;
 
-  const errorMessage = typeof error === 'string' ? error : error.message || '发生未知错误';
+  const errorMessage = typeof error === 'string' ? error : error.message || t('common.unknownError');
 
   return (
     <div className={`bg-red-50 border border-red-200 rounded-lg p-4 ${className}`}>
@@ -21,24 +23,24 @@ const ErrorMessage = ({
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-red-800">错误</h3>
+          <h3 className="text-sm font-medium text-red-800">{t('common.error')}</h3>
           <p className="mt-1 text-sm text-red-700">{errorMessage}</p>
-          {(onRetry || onDismiss) && (
+          {(onRetry || onClose) && showActions && (
             <div className="mt-3 flex space-x-2">
-              {onRetry && showRetry && (
+              {onRetry && (
                 <button
                   onClick={onRetry}
                   className="bg-red-100 text-red-800 px-3 py-1 rounded text-sm hover:bg-red-200 transition-colors"
                 >
-                  重试
+                  {t('common.retry')}
                 </button>
               )}
-              {onDismiss && (
+              {onClose && (
                 <button
-                  onClick={onDismiss}
+                  onClick={onClose}
                   className="bg-gray-100 text-gray-800 px-3 py-1 rounded text-sm hover:bg-gray-200 transition-colors"
                 >
-                  关闭
+                  {t('common.close')}
                 </button>
               )}
             </div>

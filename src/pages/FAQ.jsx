@@ -1,42 +1,44 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const FAQ = () => {
+  const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqData = [
     {
-      question: "什么是 YesCoin？",
-      answer: "YesCoin 是一个基于区块链技术的创新数字货币项目，致力于构建去中心化的数字生态系统。我们通过公平分配机制和社区治理，为用户提供安全、透明、高效的数字资产服务。"
+      question: t('faq.items.whatIsYesCoin.question'),
+      answer: t('faq.items.whatIsYesCoin.answer')
     },
     {
-      question: "如何购买 YesCoin 代币？",
-      answer: "您可以通过以下方式获得 YesCoin 代币：1) 参与我们的空投活动，完成指定任务即可免费获得；2) 铸造 Guardian NFT 获得奖励代币；3) 通过推荐好友参与项目获得推荐奖励；4) 在去中心化交易所购买（即将上线）。"
+      question: t('faq.items.howToBuy.question'),
+      answer: t('faq.items.howToBuy.answer')
     },
     {
-      question: "Guardian NFT 有什么用途？",
-      answer: "Guardian NFT 是 YesCoin 生态系统的核心组成部分，持有者享有以下权益：1) 获得代币空投奖励；2) 参与社区治理投票；3) 享受平台手续费折扣；4) 获得独家活动参与资格；5) 未来生态应用的优先体验权。"
+      question: t('faq.items.nftUtility.question'),
+      answer: t('faq.items.nftUtility.answer')
     },
     {
-      question: "项目的安全性如何保障？",
-      answer: "我们采用多重安全措施保障项目安全：1) 智能合约经过专业安全审计；2) 采用多签钱包管理资金；3) 代码开源，接受社区监督；4) 定期进行安全检查和更新；5) 与知名安全公司合作，持续监控潜在风险。"
+      question: t('faq.items.tokenomics.question'),
+      answer: t('faq.items.tokenomics.answer')
     },
     {
-      question: "代币的总供应量是多少？",
-      answer: "YesCoin 总供应量为 10 亿枚，分配方案如下：40% 用于空投奖励，30% 分配给 NFT 持有者，20% 用于流动性挖矿，10% 用于团队开发。所有代币都通过公平机制分发，团队无预挖优势。"
+      question: t('faq.items.governance.question'),
+      answer: t('faq.items.governance.answer')
     },
     {
-      question: "如何参与社区治理？",
-      answer: "持有 YesCoin 代币或 Guardian NFT 的用户都可以参与社区治理：1) 在治理平台提交提案；2) 对社区提案进行投票；3) 参与社区讨论和决策；4) 加入我们的 Discord 和 Telegram 群组；5) 关注官方社交媒体获取最新治理信息。"
+      question: t('faq.items.security.question'),
+      answer: t('faq.items.security.answer')
     },
     {
-      question: "项目的发展路线图是什么？",
-      answer: "我们的发展路线图包括：Q1 2024 - 完成智能合约开发和审计；Q2 2024 - 启动 NFT 铸造和空投活动；Q3 2024 - 上线去中心化交易所；Q4 2024 - 推出治理平台和生态应用；2025 年 - 扩展更多区块链网络和合作伙伴。"
+      question: t('faq.items.support.question'),
+      answer: t('faq.items.support.answer')
     },
     {
-      question: "如何联系团队或获得技术支持？",
-      answer: "您可以通过以下方式联系我们：1) 官方网站：yescoin.site；2) Telegram 群组：@YesCoinOfficial；3) Discord 服务器：discord.gg/yescoin；4) Twitter：@YesCoinProject；5) 邮箱：support@yescoin.site。我们的团队会及时回复您的问题。"
+      question: t('faq.items.roadmap.question'),
+      answer: t('faq.items.roadmap.answer')
     }
   ]
 
@@ -53,10 +55,10 @@ const FAQ = () => {
         className="text-center"
       >
         <h1 className="font-press text-2xl text-brown mb-4">
-          常见问题
+          {t('faq.title')}
         </h1>
         <p className="font-pixel text-brown/80 max-w-3xl mx-auto leading-relaxed">
-          关于 YesCoin 项目的常见问题解答，帮助您更好地了解我们的愿景和技术。
+          {t('faq.subtitle')}
         </p>
       </motion.div>
 
