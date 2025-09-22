@@ -1,8 +1,7 @@
-// NEW - Web3Modal提供者组件
-import { createWeb3Modal } from '@web3modal/wagmi/react'
+// NEW - Web3提供者组件
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { WagmiProvider } from 'wagmi'
-import { config, projectId } from '../config/wagmi'
+import { WagmiConfig } from 'wagmi'
+import { config } from '../config/wagmi'
 import { ReactNode, Component, ErrorInfo } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -71,31 +70,7 @@ class Web3ErrorBoundary extends Component<
   }
 }
 
-// 创建Web3Modal实例
-try {
-  createWeb3Modal({
-    wagmiConfig: config,
-    projectId,
-    enableAnalytics: false, // 禁用分析避免跨域问题
-    enableOnramp: false, // 禁用入金功能避免额外请求
-    themeMode: 'light',
-    themeVariables: {
-      '--w3m-color-mix': '#FFD700',
-      '--w3m-color-mix-strength': 20,
-      '--w3m-font-family': '"Press Start 2P", monospace',
-      '--w3m-border-radius-master': '4px',
-      '--w3m-z-index': '1000'
-    },
-    featuredWalletIds: [
-      // MetaMask
-      'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-      // WalletConnect
-      '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
-    ]
-  })
-} catch (error) {
-  console.error('Failed to create Web3Modal:', error)
-}
+// Web3Modal已移除，使用原生wagmi连接器
 
 interface Web3ProviderProps {
   children: ReactNode
@@ -104,11 +79,11 @@ interface Web3ProviderProps {
 export function Web3Provider({ children }: Web3ProviderProps) {
   return (
     <Web3ErrorBoundary>
-      <WagmiProvider config={config}>
+      <WagmiConfig config={config}>
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>
-      </WagmiProvider>
+      </WagmiConfig>
     </Web3ErrorBoundary>
   )
 }
